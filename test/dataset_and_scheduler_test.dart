@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:focuspath/data/datasources/local_store.dart';
 import 'package:focuspath/data/models/models.dart';
+import 'package:focuspath/providers.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -516,6 +517,73 @@ void main() {
       final store = LocalStore();
       await store.saveCustomSpotifyUri('spotify:playlist:my_custom_fe_mix');
       expect(store.savedCustomSpotifyUri, equals('spotify:playlist:my_custom_fe_mix'));
+    });
+  });
+
+  group('AI Study Plan & Adaptive Rescheduling Tests', () {
+    test('applyAiEndSemPlan schedules slots weighted for End-Sem Units', () async {
+      final syllabusFile = File('assets/data/syllabus.json');
+      final syllabusJson = jsonDecode(syllabusFile.readAsStringSync()) as List;
+      final syllabusSubjects = syllabusJson.map((s) => Subject.fromJson(s as Map<String, dynamic>)).toList();
+
+      final store = LocalStore();
+      final notifier = TimetableNotifier(store);
+      final count = await notifier.applyAiEndSemPlan(15, overrideSubjects: syllabusSubjects);
+      expect(count, greaterThan(0));
+      expect(notifier.state.isNotEmpty, isTrue);
+
+      for (final slot in notifier.state) {
+        expect(slot.notes, contains('End-Sem Priority'));
+        expect(slot.durationMinutes, equals(60));
+        expect(slot.unitNumber, greaterThanOrEqualTo(1));
+      }
+    });
+
+    test('shiftScheduleForHolidays shifts weekend slots to weekdays', () async {
+      final store = LocalStore();
+      final notifier = TimetableNotifier(store);
+
+      final weekendSlot = TimetableSlot(
+        id: 'slot_wknd_test',
+        subjectId: 'm1',
+        subjectName: 'Engineering Mathematics I',
+        unitName: 'Matrices',
+        unitNumber: 3,
+        timeRange: '18:00 - 19:00',
+        durationMinutes: 60,
+        dayOfWeek: 6,
+        notes: 'Weekend prep',
+      );
+      notifier.state = [weekendSlot];
+
+      final shiftedCount = await notifier.shiftScheduleForHolidays();
+      expect(shiftedCount, equals(1));
+      expect(notifier.state.first.dayOfWeek, equals(2));
+      expect(notifier.state.first.notes, contains('Shifted to Weekday'));
+    });
+
+    test('rescheduleMissedSlotsToWeekdays detects incomplete past slots and reschedules to weekdays', () async {
+      final store = LocalStore();
+      final notifier = TimetableNotifier(store);
+
+      final pastSlot = TimetableSlot(
+        id: 'slot_past_test',
+        subjectId: 'm1',
+        subjectName: 'Engineering Mathematics I',
+        unitName: 'Calculus',
+        unitNumber: 2,
+        timeRange: '10:00 - 11:00',
+        durationMinutes: 60,
+        dayOfWeek: 0,
+        isCompleted: false,
+        notes: 'Linear Algebra',
+      );
+      notifier.state = [pastSlot];
+
+      final count = await notifier.rescheduleMissedSlotsToWeekdays();
+      expect(count, equals(1));
+      expect(notifier.state.first.notes, contains('[Catch-up Slot]'));
+      expect(notifier.state.first.timeRange, equals('19:00 - 20:00'));
     });
   });
 }

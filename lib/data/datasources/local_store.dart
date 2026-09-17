@@ -402,12 +402,12 @@ class LocalStore {
     final defaultRec = InternalAssessmentRecord(
       subjectId: subject.id,
       subjectName: subject.name,
-      unitTestMarks: 10.0,
-      assignmentsMarks: 10.0,
-      quizSeminarMarks: 5.0,
-      miniProjectMarks: 8.5,
-      termWorkMarks: 22.0,
-      endSemMarks: 48.0,
+      unitTestMarks: 0.0,
+      assignmentsMarks: 0.0,
+      quizSeminarMarks: 0.0,
+      miniProjectMarks: 0.0,
+      termWorkMarks: 0.0,
+      endSemMarks: 0.0,
     );
     _internalAssessments[subject.id] = defaultRec;
     return defaultRec;

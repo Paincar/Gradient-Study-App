@@ -68,18 +68,18 @@ class FloatingBottomNav extends StatelessWidget {
                   ),
                   Expanded(
                     child: _NavItem(
-                      icon: Icons.timer_rounded,
-                      label: 'Focus',
+                      icon: Icons.auto_awesome_rounded,
+                      label: 'AI Tutor',
                       isActive: currentIndex == 2,
-                      activeColor: activeColor,
+                      activeColor: RosePineColors.dawnIris,
                       inactiveColor: inactiveColor,
                       onTap: () => onTap(2),
                     ),
                   ),
                   Expanded(
                     child: _NavItem(
-                      icon: Icons.quiz_rounded,
-                      label: 'Tests',
+                      icon: Icons.timer_rounded,
+                      label: 'Focus',
                       isActive: currentIndex == 3,
                       activeColor: activeColor,
                       inactiveColor: inactiveColor,
@@ -88,8 +88,8 @@ class FloatingBottomNav extends StatelessWidget {
                   ),
                   Expanded(
                     child: _NavItem(
-                      icon: Icons.menu_book_rounded,
-                      label: 'Notes',
+                      icon: Icons.quiz_rounded,
+                      label: 'Tests',
                       isActive: currentIndex == 4,
                       activeColor: activeColor,
                       inactiveColor: inactiveColor,
@@ -98,12 +98,22 @@ class FloatingBottomNav extends StatelessWidget {
                   ),
                   Expanded(
                     child: _NavItem(
-                      icon: Icons.person_rounded,
-                      label: 'Settings',
+                      icon: Icons.menu_book_rounded,
+                      label: 'Notes',
                       isActive: currentIndex == 5,
                       activeColor: activeColor,
                       inactiveColor: inactiveColor,
                       onTap: () => onTap(5),
+                    ),
+                  ),
+                  Expanded(
+                    child: _NavItem(
+                      icon: Icons.person_rounded,
+                      label: 'Settings',
+                      isActive: currentIndex == 6,
+                      activeColor: activeColor,
+                      inactiveColor: inactiveColor,
+                      onTap: () => onTap(6),
                     ),
                   ),
                 ],

@@ -9,6 +9,8 @@ class AuthService {
   static final AuthService instance = AuthService._internal();
   AuthService._internal();
 
+  static const String appDebugSha1 = 'F6:84:D5:F0:83:70:18:6A:4F:12:82:AF:DF:95:70:D5:1B:59:38:A7';
+
   bool _isFirebaseReady = false;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', 'profile'],
@@ -17,7 +19,24 @@ class AuthService {
   final StreamController<User?> _authStreamController =
       StreamController<User?>.broadcast();
 
+  // Local fallback student profile
+  String? _localDisplayName;
+  String? _localEmail;
+
   bool get isFirebaseReady => _isFirebaseReady;
+  bool get hasLocalProfile => _localDisplayName != null && _localDisplayName!.isNotEmpty;
+  String get effectiveDisplayName => currentUser?.displayName ?? _localDisplayName ?? 'Student';
+  String get effectiveEmail => currentUser?.email ?? _localEmail ?? 'student@sppu.edu';
+
+  void setLocalProfile(String name, String email) {
+    _localDisplayName = name;
+    _localEmail = email;
+  }
+
+  void clearLocalProfile() {
+    _localDisplayName = null;
+    _localEmail = null;
+  }
 
   Stream<User?> get authStateChanges {
     if (_isFirebaseReady) {
@@ -82,6 +101,13 @@ class AuthService {
       }
     } catch (e) {
       debugPrint('Google Sign-In exception: $e');
+      final errorStr = e.toString();
+      if (errorStr.contains('10') || errorStr.contains('sign_in_fail')) {
+        throw const GoogleSignInConfigException(
+          'Google Sign-In requires your Firebase project to have package "com.focuspath.app" registered with SHA-1 fingerprint and google-services.json in android/app/.',
+          sha1: appDebugSha1,
+        );
+      }
       rethrow;
     }
   }
@@ -89,6 +115,7 @@ class AuthService {
   /// Sign out from Google and Firebase
   Future<void> signOut() async {
     try {
+      clearLocalProfile();
       try {
         await _googleSignIn.signOut();
       } catch (_) {}
@@ -103,4 +130,12 @@ class AuthService {
       debugPrint('Sign-out error: $e');
     }
   }
+}
+
+class GoogleSignInConfigException implements Exception {
+  final String message;
+  final String sha1;
+  const GoogleSignInConfigException(this.message, {this.sha1 = AuthService.appDebugSha1});
+  @override
+  String toString() => message;
 }

@@ -187,4 +187,49 @@ class NativeService {
       return false;
     }
   }
+
+  /// Toggles native Android Do Not Disturb mode (Priority-only notifications)
+  static Future<bool> setDnd(bool enabled) async {
+    try {
+      final result = await _channel.invokeMethod<bool>('setDndEnabled', {'enable': enabled});
+      return result ?? false;
+    } catch (e) {
+      debugPrint('NativeService.setDnd failed: $e');
+      return false;
+    }
+  }
+
+  /// Checks if Android Do Not Disturb permission (Notification Policy Access) is granted
+  static Future<bool> checkDndPermission() async {
+    try {
+      final result = await _channel.invokeMethod<bool>('checkDndPermission');
+      return result ?? false;
+    } catch (e) {
+      debugPrint('NativeService.checkDndPermission failed: $e');
+      return false;
+    }
+  }
+
+  /// Opens Android Do Not Disturb / Notification Policy Access settings page
+  static Future<void> openDndSettings() async {
+    try {
+      await _channel.invokeMethod('openDndSettings');
+    } catch (e) {
+      debugPrint('NativeService.openDndSettings failed: $e');
+    }
+  }
+
+  /// Actively checks if user opened a blocked distraction app and enforces immediate block & return to Gradient
+  static Future<Map<String, dynamic>> checkAndEnforceAppBlock(List<String> blockedApps) async {
+    try {
+      final result = await _channel.invokeMapMethod<String, dynamic>(
+        'checkAndEnforceAppBlock',
+        {'blockedApps': blockedApps},
+      );
+      return result ?? {'blocked': false, 'appName': ''};
+    } catch (e) {
+      debugPrint('NativeService.checkAndEnforceAppBlock failed: $e');
+      return {'blocked': false, 'appName': ''};
+    }
+  }
 }

@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('FloatingBottomNav renders all 6 navigation tabs and fires callback', (WidgetTester tester) async {
+  testWidgets('FloatingBottomNav renders all 7 navigation tabs and fires callback', (WidgetTester tester) async {
     int tappedIndex = -1;
 
     await tester.pumpWidget(
@@ -28,6 +28,7 @@ void main() {
 
     expect(find.text('Home'), findsOneWidget);
     expect(find.text('Plan'), findsOneWidget);
+    expect(find.text('AI Tutor'), findsOneWidget);
     expect(find.text('Focus'), findsOneWidget);
     expect(find.text('Tests'), findsOneWidget);
     expect(find.text('Notes'), findsOneWidget);
@@ -37,12 +38,12 @@ void main() {
     await tester.tap(find.text('Plan'));
     expect(tappedIndex, equals(1));
 
-    // Tap Focus tab (index 2)
-    await tester.tap(find.text('Focus'));
+    // Tap AI Tutor tab (index 2)
+    await tester.tap(find.text('AI Tutor'));
     expect(tappedIndex, equals(2));
 
-    // Tap Tests tab (index 3)
-    await tester.tap(find.text('Tests'));
+    // Tap Focus tab (index 3)
+    await tester.tap(find.text('Focus'));
     expect(tappedIndex, equals(3));
   });
 

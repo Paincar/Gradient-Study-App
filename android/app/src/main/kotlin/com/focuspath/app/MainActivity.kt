@@ -97,6 +97,21 @@ class MainActivity : FlutterActivity() {
                     FocusPathWidgetProvider.updateWidgetData(this, streak, focusMinutes, nextSubject)
                     result.success(true)
                 }
+                "setDndEnabled" -> {
+                    val enable = call.argument<Boolean>("enable") ?: false
+                    result.success(setDndMode(enable))
+                }
+                "checkDndPermission" -> {
+                    result.success(hasDndPermission())
+                }
+                "openDndSettings" -> {
+                    openDndSettings()
+                    result.success(true)
+                }
+                "checkAndEnforceAppBlock" -> {
+                    val blockedApps = call.argument<List<String>>("blockedApps") ?: emptyList()
+                    result.success(checkAndEnforceAppBlock(blockedApps))
+                }
                 else -> result.notImplemented()
             }
         }
@@ -388,6 +403,112 @@ class MainActivity : FlutterActivity() {
                 "You've spent $totalMinutes min on distracting apps today. Your SPPU syllabus targets are waiting! 🎯",
                 DISTRACTION_CHANNEL_ID
             )
+        }
+
+        return result
+    }
+
+    private fun hasDndPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.isNotificationPolicyAccessGranted
+        } else {
+            true
+        }
+    }
+
+    private fun openDndSettings() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            try {
+                startActivity(intent)
+            } catch (_: Exception) {}
+        }
+    }
+
+    private fun setDndMode(enable: Boolean): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (notificationManager.isNotificationPolicyAccessGranted) {
+                if (enable) {
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                } else {
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                }
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun checkAndEnforceAppBlock(blockedAppNames: List<String>): Map<String, Any> {
+        val result = mutableMapOf<String, Any>()
+        result["blocked"] = false
+        result["appName"] = ""
+
+        if (!hasUsageStatsPermission()) {
+            return result
+        }
+
+        val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val time = System.currentTimeMillis()
+        val events = usageStatsManager.queryEvents(time - 15000, time)
+        val event = android.app.usage.UsageEvents.Event()
+        var currentForegroundPackage = ""
+
+        while (events.hasNextEvent()) {
+            events.getNextEvent(event)
+            if (event.eventType == android.app.usage.UsageEvents.Event.ACTIVITY_RESUMED ||
+                event.eventType == 1 /* MOVE_TO_FOREGROUND */) {
+                currentForegroundPackage = event.packageName
+            }
+        }
+
+        if (currentForegroundPackage.isEmpty() || currentForegroundPackage == packageName) {
+            return result
+        }
+
+        val packageMap = mapOf(
+            "Instagram" to listOf("com.instagram.android"),
+            "YouTube" to listOf("com.google.android.youtube"),
+            "Snapchat" to listOf("com.snapchat.android"),
+            "Reddit" to listOf("com.reddit.frontpage"),
+            "Netflix" to listOf("com.netflix.mediaclient"),
+            "WhatsApp" to listOf("com.whatsapp"),
+            "Discord" to listOf("com.discord"),
+            "Twitter / X" to listOf("com.twitter.android"),
+            "Telegram" to listOf("org.telegram.messenger"),
+            "TikTok" to listOf("com.zhiliaoapp.musically", "com.ss.android.ugc.trill"),
+            "Mobile Games" to listOf("com.pubg.imobile", "com.dts.freefireth", "com.activision.callofduty.shooter")
+        )
+
+        for (appName in blockedAppNames) {
+            val packages = packageMap[appName] ?: emptyList()
+            val isMatch = packages.contains(currentForegroundPackage) ||
+                    currentForegroundPackage.equals(appName, ignoreCase = true) ||
+                    (appName.length > 3 && currentForegroundPackage.contains(appName.lowercase().replace(" ", "")))
+
+            if (isMatch) {
+                result["blocked"] = true
+                result["appName"] = appName
+
+                showSystemNotification(
+                    3002,
+                    "🛡️ Focus Shield: $appName Blocked!",
+                    "Your SPPU focus timer is currently running! Return to your study session.",
+                    DISTRACTION_CHANNEL_ID
+                )
+
+                val bringToFrontIntent = packageManager.getLaunchIntentForPackage(packageName)?.apply {
+                    flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                if (bringToFrontIntent != null) {
+                    startActivity(bringToFrontIntent)
+                }
+                break
+            }
         }
 
         return result

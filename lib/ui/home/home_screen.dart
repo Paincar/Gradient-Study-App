@@ -212,6 +212,72 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 20),
 
             // 4 Fast Action Pills (Clean navigation shortcuts)
+            // AI Tutor & Study Strategist Banner Card
+            Container(
+              margin: const EdgeInsets.only(bottom: 14),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    irisAccent.withValues(alpha: isDark ? 0.28 : 0.18),
+                    primaryColor.withValues(alpha: isDark ? 0.22 : 0.12),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: irisAccent.withValues(alpha: 0.35)),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: irisAccent.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.auto_awesome_rounded, color: RosePineColors.dawnIris, size: 24),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Gradient AI Tutor & Planner',
+                          style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.bold, color: textPrimary),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'Ask doubts, plan End-Sem in X days, or auto-shift holidays & missed sessions.',
+                          style: TextStyle(fontSize: 11.5, color: textSubtle),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: irisAccent,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      minimumSize: Size.zero,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    onPressed: () => widget.onNavigateTab(2),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Ask AI', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                        SizedBox(width: 4),
+                        Icon(Icons.arrow_forward_rounded, size: 14),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             Row(
               children: [
                 Expanded(
@@ -219,7 +285,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     icon: Icons.timer_outlined,
                     label: 'Focus',
                     color: isDark ? RosePineColors.darkFoam : RosePineColors.dawnFoam,
-                    onTap: () => widget.onNavigateTab(2),
+                    onTap: () => widget.onNavigateTab(3),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -228,7 +294,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     icon: Icons.quiz_outlined,
                     label: 'Quiz',
                     color: isDark ? RosePineColors.darkIris : RosePineColors.dawnIris,
-                    onTap: () => widget.onNavigateTab(3),
+                    onTap: () => widget.onNavigateTab(4),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -246,7 +312,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     icon: Icons.edit_note_rounded,
                     label: 'Notes',
                     color: isDark ? RosePineColors.darkGold : RosePineColors.dawnGold,
-                    onTap: () => widget.onNavigateTab(4),
+                    onTap: () => widget.onNavigateTab(5),
                   ),
                 ),
               ],

@@ -159,6 +159,119 @@ class TimetableNotifier extends StateNotifier<List<TimetableSlot>> {
     state = freshSlots;
   }
 
+  /// Generates a high-intensity End-Sem study plan focused on End-Sem syllabus (Units 3-6) and weak topics
+  Future<int> applyAiEndSemPlan(int days, {List<Subject>? overrideSubjects}) async {
+    final profile = _store.userProfile;
+    final sourceSubjects = overrideSubjects ?? _store.subjects;
+    final semSubjects = sourceSubjects.where((s) => s.semester == profile.semester && !s.isExcluded).toList();
+    if (semSubjects.isEmpty) return 0;
+
+    final newSlots = <TimetableSlot>[];
+    int slotIndex = 0;
+
+    final studySlotsPerDay = profile.dailyStudyHours.clamp(2, 6);
+    final hours = [17, 18, 19, 20, 21, 22];
+
+    for (int d = 1; d <= 7; d++) {
+      for (int s = 0; s < studySlotsPerDay; s++) {
+        slotIndex++;
+        final subject = semSubjects[(slotIndex - 1) % semSubjects.length];
+
+        final endSemUnits = subject.units.where((u) => u.unitNumber >= 3).toList();
+        final unitPool = endSemUnits.isNotEmpty ? endSemUnits : subject.units;
+
+        Unit targetUnit = unitPool.first;
+        double minMastery = 1.0;
+        for (final u in unitPool) {
+          final mastery = profile.getMasteryFor(subject.id, u.unitNumber);
+          if (mastery < minMastery) {
+            minMastery = mastery;
+            targetUnit = u;
+          }
+        }
+
+        final startH = hours[s % hours.length];
+        final endH = startH + 1;
+        final timeRange = '${startH.toString().padLeft(2, '0')}:00 - ${endH.toString().padLeft(2, '0')}:00';
+
+        newSlots.add(
+          TimetableSlot(
+            id: 'ai_endsem_${d}_${s}_${DateTime.now().millisecondsSinceEpoch}',
+            dayOfWeek: d,
+            subjectId: subject.id,
+            subjectName: subject.name,
+            unitNumber: targetUnit.unitNumber,
+            unitName: targetUnit.name,
+            notes: 'End-Sem Priority ($days days prep)',
+            timeRange: timeRange,
+            durationMinutes: 60,
+            startHour: startH,
+            startMinute: 0,
+            isCompleted: false,
+            hasReminder: true,
+          ),
+        );
+      }
+    }
+
+    await _store.saveScheduleSlots(newSlots);
+    state = newSlots;
+    return newSlots.length;
+  }
+
+  /// Automatically shifts study slots falling on weekends or holidays to open weekday evenings
+  Future<int> shiftScheduleForHolidays() async {
+    final currentSlots = [...state];
+    int shiftedCount = 0;
+
+    final updatedSlots = currentSlots.map<TimetableSlot>((slot) {
+      if (slot.dayOfWeek == 6 || slot.dayOfWeek == 7) {
+        shiftedCount++;
+        final newDay = (slot.dayOfWeek == 6) ? 2 : 4;
+        return slot.copyWith(
+          dayOfWeek: newDay,
+          notes: slot.notes.isEmpty
+              ? 'Shifted to Weekday'
+              : '${slot.notes} (Shifted to Weekday)',
+        );
+      }
+      return slot;
+    }).toList();
+
+    await _store.saveScheduleSlots(updatedSlots);
+    state = updatedSlots;
+    return shiftedCount;
+  }
+
+  /// Automatically detects incomplete slots from previous days and reschedules them to upcoming weekdays
+  Future<int> rescheduleMissedSlotsToWeekdays() async {
+    final currentSlots = [...state];
+    final today = DateTime.now().weekday;
+    int rescheduledCount = 0;
+
+    final updated = currentSlots.map<TimetableSlot>((slot) {
+      if (slot.dayOfWeek < today && !slot.isCompleted) {
+        rescheduledCount++;
+        final targetDay = (today < 5) ? today + 1 : 1;
+        return slot.copyWith(
+          dayOfWeek: targetDay,
+          notes: slot.notes.isEmpty
+              ? 'Catch-up Slot'
+              : '${slot.notes} [Catch-up Slot]',
+          startHour: 19,
+          startMinute: 0,
+          durationMinutes: 60,
+          timeRange: '19:00 - 20:00',
+        );
+      }
+      return slot;
+    }).toList();
+
+    await _store.saveScheduleSlots(updated);
+    state = updated;
+    return rescheduledCount;
+  }
+
   void _scheduleNativeNotification(TimetableSlot slot) {
     try {
       final now = DateTime.now();

@@ -19,12 +19,12 @@ class _AssessmentScreenState extends ConsumerState<AssessmentScreen> {
   String? _selectedSubjectId;
 
   // Form edit controllers & state
-  double _unitTestMarks = 10.0;
-  double _assignmentsMarks = 10.0;
-  double _quizSeminarMarks = 5.0;
-  double _miniProjectMarks = 8.5;
-  double _termWorkMarks = 22.0;
-  double _endSemMarks = 48.0;
+  double _unitTestMarks = 0.0;
+  double _assignmentsMarks = 0.0;
+  double _quizSeminarMarks = 0.0;
+  double _miniProjectMarks = 0.0;
+  double _termWorkMarks = 0.0;
+  double _endSemMarks = 0.0;
 
   bool _initializedSubject = false;
 

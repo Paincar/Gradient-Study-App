@@ -81,79 +81,20 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
     } catch (_) {}
   }
 
-  void _exportIcsSchedule(BuildContext context) {
-    final buffer = StringBuffer();
-    buffer.writeln('BEGIN:VCALENDAR');
-    buffer.writeln('VERSION:2.0');
-    buffer.writeln('PRODID:-//Gradient//SPPU Academic Calendar 2026//EN');
-    buffer.writeln('CALSCALE:GREGORIAN');
-    buffer.writeln('X-WR-CALNAME:SPPU FE 2026 Academic & Holidays');
-
-    for (final h in _holidays) {
-      final dStr = h['date'] as String? ?? '';
-      final parts = dStr.split('-');
-      if (parts.length == 3) {
-        final cleanDate = '${parts[0]}${parts[1]}${parts[2]}';
-        buffer.writeln('BEGIN:VEVENT');
-        buffer.writeln('SUMMARY:${h['name']}');
-        buffer.writeln('DTSTART;VALUE=DATE:$cleanDate');
-        buffer.writeln('DESCRIPTION:${h['isNational'] == true ? 'SPPU & National Gazetted Holiday' : (h['category'] == 'SPPU Exam' ? 'SPPU University Examination' : 'Academic Event')}');
-        buffer.writeln('STATUS:CONFIRMED');
-        buffer.writeln('END:VEVENT');
+  Future<void> _syncWithGoogleCalendar(BuildContext context) async {
+    final holiday = _getHolidayForDate(_selectedDate);
+    if (holiday != null) {
+      final name = holiday['name'] as String? ?? 'SPPU Event';
+      final details = holiday['category'] as String? ?? 'Academic Event';
+      await _addToGoogleCalendar(name, _selectedDate, details: details);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('✨ Added "$name" to your Google Calendar!')),
+        );
       }
+    } else {
+      await _openGoogleCalendar();
     }
-
-    buffer.writeln('END:VCALENDAR');
-    final icsContent = buffer.toString();
-
-    Clipboard.setData(ClipboardData(text: icsContent));
-
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Row(
-          children: [
-            Icon(Icons.calendar_month_rounded, color: RosePineColors.dawnIris),
-            SizedBox(width: 8),
-            Text('Google Calendar (.ics) Export'),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '✅ Complete 2026 iCalendar (.ics) format copied to your clipboard!\n\nContains all 43 SPPU 2026 exam dates, In-Sem / End-Sem schedules, and Maharashtra state holidays.',
-              style: TextStyle(fontSize: 13, height: 1.4),
-            ),
-            const SizedBox(height: 14),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                'How to import to Google Calendar:\n1. Open calendar.google.com on web\n2. Click Settings ⚙️ -> "Import & Export"\n3. Paste or save text as sppu_2026.ics and import into your Google Calendar!',
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Close')),
-          ElevatedButton.icon(
-            icon: const Icon(Icons.open_in_browser_rounded, size: 16),
-            label: const Text('Open Google Calendar'),
-            onPressed: () {
-              Navigator.pop(ctx);
-              _openGoogleCalendar();
-            },
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -179,8 +120,8 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.event_available_rounded),
-            tooltip: 'Google Calendar Sync / Export (.ics)',
-            onPressed: () => _exportIcsSchedule(context),
+            tooltip: 'Sync with Google Calendar',
+            onPressed: () => _syncWithGoogleCalendar(context),
           ),
           IconButton(
             icon: const Icon(Icons.add_task_rounded),
@@ -231,13 +172,13 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Sync 43 SPPU 2026 exam dates & holidays to Google Calendar.',
+                            'Sync SPPU 2026 exam dates & holidays to Google Calendar.',
                             style: TextStyle(fontSize: 11, color: textSubtle),
                           ),
                         ],
                       ),
                     ),
-                    ElevatedButton(
+                    ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
                         foregroundColor: Colors.white,
@@ -245,8 +186,9 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
                         minimumSize: Size.zero,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
-                      onPressed: () => _exportIcsSchedule(context),
-                      child: const Text('Export .ics', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                      icon: const Icon(Icons.sync_rounded, size: 14),
+                      label: const Text('Sync', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                      onPressed: () => _syncWithGoogleCalendar(context),
                     ),
                   ],
                 ),

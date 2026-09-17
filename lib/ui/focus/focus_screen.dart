@@ -74,18 +74,56 @@ class _FocusScreenState extends ConsumerState<FocusScreen> {
     _timer?.cancel();
     _audioPlayer?.dispose();
     _customSpotifyController.dispose();
+    NativeService.setDnd(false);
     super.dispose();
   }
 
-  void _toggleTimer() {
+  void _toggleTimer() async {
+    final profile = ref.read(userProfileNotifierProvider);
     if (_isRunning) {
       _timer?.cancel();
       _audioPlayer?.pause();
       setState(() => _isRunning = false);
+      if (profile.dndEnabled) {
+        NativeService.setDnd(false);
+      }
     } else {
       _startTimer();
       _playSelectedSound();
       setState(() => _isRunning = true);
+      if (profile.dndEnabled && !_isBreak) {
+        _handleDndActivation();
+      }
+    }
+  }
+
+  Future<void> _handleDndActivation() async {
+    final hasDnd = await NativeService.checkDndPermission();
+    if (hasDnd) {
+      await NativeService.setDnd(true);
+    } else if (mounted) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Do Not Disturb Access'),
+          content: const Text(
+            'To automatically silence distracting notifications while your study timer is running, Gradient requires Do Not Disturb access in Android settings.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Not Now'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+                NativeService.openDndSettings();
+              },
+              child: const Text('Open Settings'),
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -102,12 +140,12 @@ class _FocusScreenState extends ConsumerState<FocusScreen> {
       
       final now = DateTime.now();
       
-      // Periodically check for distractions every ~60 seconds (120 ticks) while focus timer is active
+      // Actively enforce app blocking every 2 seconds (4 ticks) during focus mode
       if (!_isBreak) {
         _distractionCheckTicks++;
-        if (_distractionCheckTicks >= 120) {
+        if (_distractionCheckTicks >= 4) {
           _distractionCheckTicks = 0;
-          _checkDistractionsBackground();
+          _enforceActiveAppBlock();
         }
       }
 
@@ -124,23 +162,22 @@ class _FocusScreenState extends ConsumerState<FocusScreen> {
     });
   }
 
-  Future<void> _checkDistractionsBackground() async {
+  Future<void> _enforceActiveAppBlock() async {
     final profile = ref.read(userProfileNotifierProvider);
     if (profile.appBlockingTier == 'Off' || profile.blockedApps.isEmpty) return;
 
-    final result = await NativeService.checkDistractionUsage(
-      appNames: profile.blockedApps,
-      thresholdMinutes: profile.distractionThresholdMinutes,
-    );
-    
-    if (result['exceededThreshold'] == true) {
-      final totalMins = (result['totalMinutes'] as num?)?.toInt() ?? 0;
-      final app = (result['mostUsedApp'] as String?) ?? '';
-      
-      await NativeService.showNotification(
-        title: '⚠️ Focus Shield Alert',
-        body: 'You have spent $totalMins min on $app. Return to your SPPU Engineering study block!',
-        channelId: 'focuspath_distraction_alerts',
+    final result = await NativeService.checkAndEnforceAppBlock(profile.blockedApps);
+    if (result['blocked'] == true && mounted) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: RosePineColors.dawnLove,
+          content: Text(
+            '🛡️ Focus Shield: ${result['appName']} blocked! Study session in progress.',
+            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          duration: const Duration(seconds: 3),
+        ),
       );
     }
   }
@@ -156,6 +193,9 @@ class _FocusScreenState extends ConsumerState<FocusScreen> {
       if (_selectedSubjectId != null) {
         await ref.read(localStoreProvider).logStudyTime(_selectedSubjectId!, focusMinutes);
       }
+
+      // Turn off DND for break
+      NativeService.setDnd(false);
 
       setState(() {
         _isBreak = true;
@@ -245,6 +285,7 @@ class _FocusScreenState extends ConsumerState<FocusScreen> {
   void _resetTimer() {
     _timer?.cancel();
     _audioPlayer?.stop();
+    NativeService.setDnd(false);
     setState(() {
       _isRunning = false;
       _isBreak = false;

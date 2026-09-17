@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../core/services/auth_service.dart';
@@ -15,11 +16,16 @@ import '../onboarding/onboarding_screen.dart';
 import '../syllabus/syllabus_screen.dart';
 import 'app_blocking_screen.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  @override
+  Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final store = ref.watch(localStoreProvider);
     final profile = ref.watch(userProfileNotifierProvider);
@@ -92,6 +98,9 @@ class SettingsScreen extends ConsumerWidget {
                 stream: AuthService.instance.authStateChanges,
                 builder: (context, snapshot) {
                   final user = snapshot.data ?? AuthService.instance.currentUser;
+                  final isLoggedIn = user != null || AuthService.instance.hasLocalProfile;
+                  final displayName = user?.displayName ?? (AuthService.instance.hasLocalProfile ? AuthService.instance.effectiveDisplayName : null);
+                  final email = user?.email ?? (AuthService.instance.hasLocalProfile ? AuthService.instance.effectiveEmail : null);
                   return Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     child: Padding(
@@ -101,41 +110,43 @@ class SettingsScreen extends ConsumerWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.cloud_sync_rounded, color: primaryColor, size: 22),
+                              Icon(Icons.cloud_done_rounded, color: primaryColor, size: 22),
                               const SizedBox(width: 8),
                               Text(
-                                'Google Account & Cloud Backup',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.5, color: textPrimary),
+                                'Google Cloud & Firebase Sync',
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: textPrimary),
                               ),
                               const Spacer(),
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                 decoration: BoxDecoration(
-                                  color: user != null
+                                  color: isLoggedIn
                                       ? Colors.green.withValues(alpha: 0.15)
                                       : Colors.orange.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  user != null ? 'Connected' : 'Offline / Local',
+                                  user != null
+                                      ? 'Cloud Connected'
+                                      : (isLoggedIn ? 'Local Profile' : 'Offline / Local'),
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
-                                    color: user != null ? Colors.green : Colors.orange,
+                                    color: isLoggedIn ? Colors.green : Colors.orange,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 12),
-                          if (user != null) ...[
+                          if (isLoggedIn) ...[
                             Row(
                               children: [
                                 CircleAvatar(
                                   radius: 18,
-                                  backgroundImage: user.photoURL != null ? NetworkImage(user.photoURL!) : null,
-                                  child: user.photoURL == null
-                                      ? Text((user.displayName ?? 'U')[0].toUpperCase())
+                                  backgroundImage: user?.photoURL != null ? NetworkImage(user!.photoURL!) : null,
+                                  child: (user?.photoURL == null)
+                                      ? Text((displayName ?? 'U')[0].toUpperCase())
                                       : null,
                                 ),
                                 const SizedBox(width: 12),
@@ -144,11 +155,11 @@ class SettingsScreen extends ConsumerWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        user.displayName ?? 'Google User',
+                                        displayName ?? 'Student User',
                                         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5, color: textPrimary),
                                       ),
                                       Text(
-                                        user.email ?? '',
+                                        email ?? '',
                                         style: TextStyle(fontSize: 12, color: textSubtle),
                                       ),
                                     ],
@@ -169,7 +180,7 @@ class SettingsScreen extends ConsumerWidget {
                                       await ref.read(notesNotifierProvider.notifier).saveNotes(merged);
                                       if (context.mounted) {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('✨ Notes backed up to Google Cloud!')),
+                                          const SnackBar(content: Text('✨ Notes synchronized safely!')),
                                         );
                                       }
                                     },
@@ -179,6 +190,7 @@ class SettingsScreen extends ConsumerWidget {
                                 TextButton(
                                   onPressed: () async {
                                     await AuthService.instance.signOut();
+                                    setState(() {});
                                   },
                                   child: const Text('Sign Out', style: TextStyle(color: Colors.redAccent)),
                                 ),
@@ -190,30 +202,39 @@ class SettingsScreen extends ConsumerWidget {
                               style: TextStyle(fontSize: 12.5, color: textSubtle, height: 1.35),
                             ),
                             const SizedBox(height: 14),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: primaryColor,
-                                  foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: primaryColor,
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                    ),
+                                    icon: const Icon(Icons.g_mobiledata_rounded, size: 24),
+                                    label: const Text('Sign in with Google', style: TextStyle(fontWeight: FontWeight.bold)),
+                                    onPressed: () async {
+                                      try {
+                                        await AuthService.instance.signInWithGoogle();
+                                        final current = ref.read(notesNotifierProvider);
+                                        final merged = await CloudSyncService.instance.syncAllNotes(current);
+                                        await ref.read(notesNotifierProvider.notifier).saveNotes(merged);
+                                      } catch (e) {
+                                        if (context.mounted) {
+                                          _showGoogleSignInHelpDialog(context, ref);
+                                        }
+                                      }
+                                    },
+                                  ),
                                 ),
-                                icon: const Icon(Icons.g_mobiledata_rounded, size: 24),
-                                label: const Text('Sign in with Google', style: TextStyle(fontWeight: FontWeight.bold)),
-                                onPressed: () async {
-                                  try {
-                                    await AuthService.instance.signInWithGoogle();
-                                    final current = ref.read(notesNotifierProvider);
-                                    final merged = await CloudSyncService.instance.syncAllNotes(current);
-                                    await ref.read(notesNotifierProvider.notifier).saveNotes(merged);
-                                  } catch (e) {
-                                    if (context.mounted) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('Sign-In notice: $e')),
-                                      );
-                                    }
-                                  }
-                                },
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Center(
+                              child: TextButton.icon(
+                                icon: const Icon(Icons.person_outline_rounded, size: 16),
+                                label: const Text('Continue with Student Profile (Offline/Local)'),
+                                onPressed: () => _showLocalStudentProfileDialog(context, ref),
                               ),
                             ),
                           ],
@@ -1287,6 +1308,137 @@ class SettingsScreen extends ConsumerWidget {
               if (ctx.mounted) Navigator.pop(ctx);
             },
             child: const Text('Save Persona'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showGoogleSignInHelpDialog(BuildContext context, [WidgetRef? _]) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.info_outline_rounded, color: Colors.orange),
+            SizedBox(width: 8),
+            Text('Google Sign-In Notice'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Google Play Services returned Code 10 (DEVELOPER_ERROR).\n\nThis occurs because Google Sign-In requires your Firebase project to have package "com.focuspath.app" registered with this device\'s SHA-1 signing key.',
+              style: TextStyle(fontSize: 13, height: 1.4),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Debug SHA-1 Key:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 4),
+                  SelectableText(
+                    AuthService.appDebugSha1,
+                    style: TextStyle(fontSize: 11, fontFamily: 'monospace'),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            OutlinedButton.icon(
+              icon: const Icon(Icons.copy_rounded, size: 14),
+              label: const Text('Copy SHA-1 Fingerprint', style: TextStyle(fontSize: 12)),
+              onPressed: () {
+                Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('✅ SHA-1 copied to clipboard!')),
+                );
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Close')),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              _showLocalStudentProfileDialog(context);
+            },
+            child: const Text('Use Student Profile'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLocalStudentProfileDialog(BuildContext context, [WidgetRef? _]) {
+    final profile = ref.read(userProfileNotifierProvider);
+    final nameCtrl = TextEditingController(text: profile.name.isNotEmpty ? profile.name : 'Student');
+    final emailCtrl = TextEditingController(text: 'student@sppu.edu');
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.person_pin_rounded, color: RosePineColors.dawnIris),
+            SizedBox(width: 8),
+            Text('Local Student Profile'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Set up your student profile to safely keep notes and progress saved on your device without needing cloud configuration.',
+              style: TextStyle(fontSize: 12.5, height: 1.4),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: nameCtrl,
+              decoration: InputDecoration(
+                labelText: 'Student Name',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: emailCtrl,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          ElevatedButton(
+            onPressed: () async {
+              final name = nameCtrl.text.trim().isNotEmpty ? nameCtrl.text.trim() : 'Student';
+              final email = emailCtrl.text.trim().isNotEmpty ? emailCtrl.text.trim() : 'student@sppu.edu';
+              AuthService.instance.setLocalProfile(name, email);
+              await ref.read(userProfileNotifierProvider.notifier).updateProfile(profile.copyWith(name: name));
+              if (ctx.mounted) Navigator.pop(ctx);
+              setState(() {});
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('✨ Welcome, $name! Profile activated.')),
+                );
+              }
+            },
+            child: const Text('Activate Profile'),
           ),
         ],
       ),

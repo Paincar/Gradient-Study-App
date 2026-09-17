@@ -11,6 +11,7 @@ import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/settings/settings_screen.dart';
 import 'ui/tests/test_hub_screen.dart';
 import 'ui/timetable/timetable_screen.dart';
+import 'ui/ai/ai_assistant_screen.dart';
 
 import 'data/datasources/local_store.dart';
 
@@ -83,6 +84,7 @@ class _MainNavigationHostState extends ConsumerState<MainNavigationHost> {
     final screens = [
       HomeScreen(onNavigateTab: (idx) => setState(() => _currentIndex = idx)),
       const TimetableScreen(),
+      const AiAssistantScreen(),
       const FocusScreen(),
       const TestHubScreen(),
       const NotesScreen(),

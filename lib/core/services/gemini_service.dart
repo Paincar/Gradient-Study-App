@@ -192,6 +192,132 @@ ${examples.join('\n')}
 ''';
   }
 
+  /// Real-time chat with AI Tutor & Study Strategist supporting conversational history
+  static Future<String> chat({
+    required String prompt,
+    required UserProfile profile,
+    required String apiKey,
+    List<Map<String, String>> history = const [],
+    List<Subject> subjects = const [],
+  }) async {
+    final activeSubjects = subjects.map((s) => s.name).join(', ');
+    final isPlanRequest = prompt.toLowerCase().contains('plan') || 
+                          prompt.toLowerCase().contains('schedule') || 
+                          prompt.toLowerCase().contains('end sem') ||
+                          prompt.toLowerCase().contains('holiday') ||
+                          prompt.toLowerCase().contains('missed');
+
+    final systemPrompt = '''
+You are Gradient AI, an expert academic tutor and study strategist for Savitribai Phule Pune University (SPPU) First Year Engineering (2024 Revised Pattern).
+Student Profile:
+- Name: ${profile.name}
+- Semester: ${profile.semester}
+- Active Subjects: $activeSubjects
+- Daily Study Target: ${profile.dailyStudyHours} hours/day
+- Peak Motivation Window: ${profile.peakMotivationWindow}
+- Weak Units: ${profile.unitMastery.entries.where((e) => e.value < 0.6).map((e) => e.key).join(', ')}
+
+Guidelines:
+1. When asked about study plans or exam prep:
+   - Calculate pacing based on SPPU weightage (In-Sem: Units 1-2; End-Sem: Units 3-5/6).
+   - Structure a clear, actionable daily revision schedule.
+   - Mention that you can automatically apply this schedule to their in-app timetable with 1 tap.
+2. When asked about engineering concepts:
+   - Provide clear definitions, formula breakdowns, step-by-step steps, and SPPU PYQ exam tips.
+3. Keep formatting clean with bold headers, bullet points, and equations.
+''';
+
+    if (profile.customOpenAiBaseUrl.isNotEmpty) {
+      try {
+        final url = Uri.parse(profile.customOpenAiBaseUrl.endsWith('/')
+            ? '${profile.customOpenAiBaseUrl}chat/completions'
+            : '${profile.customOpenAiBaseUrl}/chat/completions');
+        final headers = {'Content-Type': 'application/json'};
+        if (profile.customOpenAiApiKey.isNotEmpty) {
+          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey}';
+        }
+
+        final messages = <Map<String, String>>[
+          {'role': 'system', 'content': systemPrompt},
+          ...history,
+          {'role': 'user', 'content': prompt.trim()},
+        ];
+
+        final response = await http.post(
+          url,
+          headers: headers,
+          body: jsonEncode({
+            'model': profile.customOpenAiModel.isNotEmpty ? profile.customOpenAiModel : 'llama3',
+            'messages': messages,
+            'temperature': 0.7,
+          }),
+        ).timeout(const Duration(seconds: 25));
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body) as Map<String, dynamic>;
+          final choices = data['choices'] as List<dynamic>?;
+          if (choices != null && choices.isNotEmpty) {
+            return choices.first['message']['content']?.toString() ?? 'No response generated.';
+          }
+        }
+      } catch (e) {
+        debugPrint('Custom OpenAI chat error: $e');
+      }
+    }
+
+    if (apiKey.trim().isNotEmpty) {
+      for (final modelName in [_primaryModel, _secondaryModel, _fallbackModel]) {
+        try {
+          final model = GenerativeModel(
+            model: modelName,
+            apiKey: apiKey.trim(),
+            systemInstruction: Content.system(systemPrompt),
+          );
+
+          final chatSession = model.startChat(
+            history: history.map((m) {
+              if (m['role'] == 'user') {
+                return Content.text(m['content'] ?? '');
+              } else {
+                return Content.model([TextPart(m['content'] ?? '')]);
+              }
+            }).toList(),
+          );
+
+          final response = await chatSession.sendMessage(Content.text(prompt.trim())).timeout(const Duration(seconds: 25));
+          final text = response.text;
+          if (text != null && text.trim().isNotEmpty) {
+            return text.trim();
+          }
+        } catch (e) {
+          debugPrint('Gemini chat failed on $modelName: $e');
+        }
+      }
+    }
+
+    if (isPlanRequest) {
+      return '''
+# 📅 SPPU End-Sem Study & Revision Strategy
+
+Here is a structured academic study plan tailored for your active semester subjects ($activeSubjects):
+
+### 🎯 High-Yield Weightage Breakdown (SPPU 2024 Pattern):
+- **End-Semester Focus:** Units 3, 4, 5, and 6 carry the maximum marks in your 60-mark End-Sem theory exam.
+- **Daily Target:** Allocate ${profile.dailyStudyHours} hours daily during your ${profile.peakMotivationWindow}.
+
+### 📋 Recommended Daily Distribution:
+1. **Block 1 (90 mins):** Deep conceptual derivations & numerical problems for high-weightage units.
+2. **Block 2 (60 mins):** Solve SPPU Previous Year Question (PYQ) 5-mark and 6-mark problems.
+3. **Block 3 (30 mins):** Formula sheet consolidation & diagnostic quiz review.
+
+💡 **One-Tap Schedule Update:**
+You can tap the action button below to instantly apply this optimized End-Sem plan to your timetable!
+''';
+    }
+
+    return '💡 **AI Academic Tutor**\n\nTo unlock live real-time conversational responses from Gemini 2.5 Flash, please configure your Gemini API Key in Settings (or connect your local llama.cpp / Ollama API endpoint).';
+  }
+
   /// Generates a Quiz dynamically using AI (Gemini or OpenAI Compatible)
   static Future<List<Question>> generateQuiz({
     required Subject subject,

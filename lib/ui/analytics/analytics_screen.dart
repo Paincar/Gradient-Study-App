@@ -26,9 +26,10 @@ class AnalyticsScreen extends ConsumerWidget {
     // Filter active semester subjects
     final subjects = store.subjects.where((s) => s.semester == profile.semester && !s.isExcluded).toList();
 
-    // Calculate days until exam
-    final examDateTime = DateTime.tryParse(profile.examDate) ?? DateTime.now().add(const Duration(days: 60));
-    final daysUntilExam = examDateTime.difference(DateTime.now()).inDays.clamp(0, 365);
+    // Calculate days until exam if configured
+    final hasExamDate = profile.examDate.trim().isNotEmpty;
+    final examDateTime = hasExamDate ? DateTime.tryParse(profile.examDate) : null;
+    final daysUntilExam = (examDateTime != null) ? examDateTime.difference(DateTime.now()).inDays.clamp(0, 365) : null;
 
     // Fetch weekly study hours from last 7 days
     final now = DateTime.now();
@@ -52,7 +53,7 @@ class AnalyticsScreen extends ConsumerWidget {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             children: [
-              // Top Exam Countdown Banner
+              // Top Exam Countdown or Setup Banner
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
@@ -75,7 +76,7 @@ class AnalyticsScreen extends ConsumerWidget {
                         color: primaryColor.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.alarm_on_rounded, color: primaryColor, size: 28),
+                      child: Icon(hasExamDate ? Icons.alarm_on_rounded : Icons.calendar_today_rounded, color: primaryColor, size: 28),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -83,16 +84,42 @@ class AnalyticsScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '$daysUntilExam Days Until SPPU Exams',
+                            hasExamDate ? '$daysUntilExam Days Until SPPU Exams' : 'Target Your SPPU Exam Date',
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textPrimary),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Target: ${profile.dailyStudyHours}h/day · ${daysUntilExam * profile.dailyStudyHours}h remaining prep',
+                            hasExamDate
+                                ? 'Target: ${profile.dailyStudyHours}h/day · ${(daysUntilExam ?? 0) * profile.dailyStudyHours}h prep remaining'
+                                : 'Set your exam date to unlock dynamic prep countdown and AI revision pacing.',
                             style: TextStyle(fontSize: 12, color: textSubtle),
                           ),
                         ],
                       ),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      onPressed: () async {
+                        final picked = await showDatePicker(
+                          context: context,
+                          initialDate: examDateTime ?? DateTime.now().add(const Duration(days: 30)),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now().add(const Duration(days: 365)),
+                        );
+                        if (picked != null) {
+                          final formatted = '${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}';
+                          await ref.read(userProfileNotifierProvider.notifier).updateProfile(
+                            profile.copyWith(examDate: formatted),
+                          );
+                        }
+                      },
+                      child: Text(hasExamDate ? 'Edit' : 'Set Date', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
                     ),
                   ],
                 ),
