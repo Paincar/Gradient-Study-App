@@ -1,0 +1,68 @@
+name: focuspath
+description: "Gradient - Engineering Focus & Academic Notes for SPPU Students"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI & Design System
+  cupertino_icons: ^1.0.8
+
+  # State Management & DI
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+  go_router: ^14.2.7
+
+  # Local Key-Value Storage
+  shared_preferences: ^2.3.2
+
+  # Charts & Visualization
+  fl_chart: ^0.69.0
+
+  # Audio & Ambient Sounds
+  just_audio: ^0.9.40
+
+  # Animations
+  flutter_animate: ^4.5.0
+
+  # Generative AI (Gemini)
+  google_generative_ai: ^0.4.6
+  url_launcher: ^6.3.2
+
+  # Cloud & Authentication (Firebase)
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  google_sign_in: ^6.2.1
+  webview_flutter: ^4.14.1
+  http: ^1.6.0
+  share_plus: ^13.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/sounds/
+    - assets/fonts/
+    - assets/data/
+    - assets/data/questions/
+
+  fonts:
+    - family: DINCond
+      fonts:
+        - asset: assets/fonts/DINCond-Regular.otf
+          weight: 400
+        - asset: assets/fonts/DINCond-Bold.otf
+          weight: 700

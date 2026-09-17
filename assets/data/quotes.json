@@ -1,0 +1,17 @@
+[
+  {"id": 1, "text": "The secret of getting ahead is getting started.", "author": "Mark Twain", "category": "study"},
+  {"id": 2, "text": "It always seems impossible until it's done.", "author": "Nelson Mandela", "category": "persistence"},
+  {"id": 3, "text": "Don't watch the clock; do what it does. Keep going.", "author": "Sam Levenson", "category": "focus"},
+  {"id": 4, "text": "Continuous improvement is better than delayed perfection.", "author": "Mark Twain", "category": "study"},
+  {"id": 5, "text": "Small daily improvements over time lead to stunning results.", "author": "Robin Sharma", "category": "study"},
+  {"id": 6, "text": "Engineering is the art of directing the great sources of power in nature for the use and convenience of man.", "author": "Thomas Tredgold", "category": "study"},
+  {"id": 7, "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.", "author": "Winston Churchill", "category": "persistence"},
+  {"id": 8, "text": "Focus is a muscle. The more you practice saying no to distractions, the stronger it gets.", "author": "Gradient", "category": "focus"},
+  {"id": 9, "text": "One day or day one. You decide.", "author": "Paulo Coelho", "category": "focus"},
+  {"id": 10, "text": "The expert in anything was once a beginner.", "author": "Helen Hayes", "category": "study"},
+  {"id": 11, "text": "Believe you can and you're halfway there.", "author": "Theodore Roosevelt", "category": "persistence"},
+  {"id": 12, "text": "Energy and persistence conquer all things.", "author": "Benjamin Franklin", "category": "persistence"},
+  {"id": 13, "text": "Action is the foundational key to all success.", "author": "Pablo Picasso", "category": "focus"},
+  {"id": 14, "text": "Quality is not an act, it is a habit.", "author": "Aristotle", "category": "study"},
+  {"id": 15, "text": "Every accomplishment starts with the decision to try.", "author": "John F. Kennedy", "category": "study"}
+]

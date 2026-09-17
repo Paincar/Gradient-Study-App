@@ -1,0 +1,122 @@
+[
+  {
+    "id": "q_mec_u1_1",
+    "subjectId": "mechanics",
+    "unitNumber": 1,
+    "topic": "Varignon's Theorem of Moments",
+    "questionText": "Varignon's theorem states that the moment of a resultant force about any point in the plane is equal to:",
+    "options": [
+      "The algebraic sum of the moments of its component forces about that same point",
+      "Zero for concurrent force systems",
+      "The product of force and perpendicular distance squared",
+      "The vector cross product of resultant and couple"
+    ],
+    "correctOption": 0,
+    "explanation": "Varignon's theorem of moments states: M_R = sum(M_F), the moment of the resultant force about any point equals the algebraic sum of the moments of individual component forces about that point.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u1_2",
+    "subjectId": "mechanics",
+    "unitNumber": 1,
+    "topic": "Moment of Inertia & Parallel Axis Theorem",
+    "questionText": "For a rectangular lamina of base b and height h, what is its moment of inertia I_x about its centroidal horizontal axis?",
+    "options": [
+      "(b * h^3) / 12",
+      "(b * h^3) / 3",
+      "(b^3 * h) / 12",
+      "(b * h^2) / 6"
+    ],
+    "correctOption": 0,
+    "explanation": "I_xx(centroidal) = integral y^2 dA = b * integral_{-h/2}^{h/2} y^2 dy = (b * h^3) / 12.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u2_1",
+    "subjectId": "mechanics",
+    "unitNumber": 2,
+    "topic": "Equilibrium & Lami's Theorem",
+    "questionText": "Lami's Theorem is applicable for static equilibrium when a body is acted upon by:",
+    "options": [
+      "Three coplanar, concurrent, and non-collinear forces",
+      "Two parallel forces",
+      "Any system of four general forces",
+      "Frictionless couples only"
+    ],
+    "correctOption": 0,
+    "explanation": "Lami's theorem states: P/sin(alpha) = Q/sin(beta) = R/sin(gamma), valid specifically for three coplanar concurrent forces in equilibrium.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u3_1",
+    "subjectId": "mechanics",
+    "unitNumber": 3,
+    "topic": "Coulomb Friction & Angle of Repose",
+    "questionText": "The angle of repose theta for a block on an inclined plane with coefficient of static friction mu is given by:",
+    "options": [
+      "tan(theta) = mu",
+      "sin(theta) = mu",
+      "cos(theta) = mu",
+      "theta = mu * 90 degrees"
+    ],
+    "correctOption": 0,
+    "explanation": "At impending motion down the plane: m*g*sin(theta) = F_max = mu * m*g*cos(theta) => tan(theta) = mu.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u4_1",
+    "subjectId": "mechanics",
+    "unitNumber": 4,
+    "topic": "Kinematics & Projectile Motion",
+    "questionText": "A particle is projected with initial velocity u at angle alpha to the horizontal. What is its maximum horizontal range R_max?",
+    "options": [
+      "u^2 / g (at alpha = 45 degrees)",
+      "u^2 / (2 * g)",
+      "2 * u^2 / g",
+      "u^2 * sin(alpha) / g"
+    ],
+    "correctOption": 0,
+    "explanation": "R = (u^2 * sin(2*alpha)) / g. Maximum range occurs when sin(2*alpha) = 1 (alpha = 45°), yielding R_max = u^2 / g.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u5_1",
+    "subjectId": "mechanics",
+    "unitNumber": 5,
+    "topic": "Kinetics & Work-Energy Principle",
+    "questionText": "The Work-Energy principle for a particle of mass m states that net work done by all forces equals:",
+    "options": [
+      "Change in Kinetic Energy (KE_final - KE_initial)",
+      "Rate of change of momentum",
+      "Total potential energy",
+      "Impulse of the force"
+    ],
+    "correctOption": 0,
+    "explanation": "W_net = integral F dx = integral m*(v dv/dx)*dx = integral m*v dv = 1/2*m*v2^2 - 1/2*m*v1^2 = Delta KE.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  }
+]

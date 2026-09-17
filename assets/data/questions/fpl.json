@@ -1,0 +1,102 @@
+[
+  {
+    "id": "q_fpl_u1_1",
+    "subjectId": "fpl",
+    "unitNumber": 1,
+    "topic": "Algorithms & Flowchart Symbols",
+    "questionText": "In a standard flowchart, what geometric shape is used to represent a conditional decision?",
+    "options": [
+      "Rhombus / Diamond",
+      "Rectangle (Process)",
+      "Oval / Ellipse (Start/Stop)",
+      "Parallelogram (I/O)"
+    ],
+    "correctOption": 0,
+    "explanation": "A diamond/rhombus symbol represents conditional branching with two or more exit paths (True/False).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u2_1",
+    "subjectId": "fpl",
+    "unitNumber": 2,
+    "topic": "Operators, Precedence & Associativity in C",
+    "questionText": "In C language, what is the output of the expression: int x = 5 + 3 * 2 % 4; ?",
+    "options": [
+      "7",
+      "6",
+      "8",
+      "0"
+    ],
+    "correctOption": 0,
+    "explanation": "* and % have higher precedence than +, evaluated left-to-right: 3 * 2 = 6, 6 % 4 = 2, then 5 + 2 = 7.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u3_1",
+    "subjectId": "fpl",
+    "unitNumber": 3,
+    "topic": "Control Flow & Switch Statements",
+    "questionText": "In a C switch-case statement, what happens if the 'break' statement is omitted from a matched case?",
+    "options": [
+      "Execution falls through to subsequent cases until a break or end is reached",
+      "Compiler throws a syntax error",
+      "Switch statement restarts from case 1",
+      "Program terminates abruptly"
+    ],
+    "correctOption": 0,
+    "explanation": "In C, omission of 'break' results in 'fall-through', executing all subsequent case blocks regardless of condition until a break is encountered.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u4_1",
+    "subjectId": "fpl",
+    "unitNumber": 4,
+    "topic": "Arrays & Strings in C",
+    "questionText": "What character is automatically appended by the C compiler to terminate a string literal in memory?",
+    "options": [
+      "Null character '\\0'",
+      "Newline '\\n'",
+      "EOF character",
+      "Space ' '"
+    ],
+    "correctOption": 0,
+    "explanation": "C strings are null-terminated arrays of characters ending with byte '\\0' (ASCII 0).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u5_1",
+    "subjectId": "fpl",
+    "unitNumber": 5,
+    "topic": "User Defined Functions & Recursion",
+    "questionText": "What is the primary condition that must be present in every recursive function to avoid an infinite recursion stack overflow?",
+    "options": [
+      "A base condition / terminating case",
+      "A while loop",
+      "Static variables",
+      "At least two return parameters"
+    ],
+    "correctOption": 0,
+    "explanation": "A recursive function must have a base terminating case that stops further recursive calls and unwinds the call stack.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  }
+]

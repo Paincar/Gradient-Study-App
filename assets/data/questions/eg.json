@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q_eg_u1_1",
+    "subjectId": "eg",
+    "unitNumber": 1,
+    "topic": "Projections of Points & First Angle System",
+    "questionText": "In First Angle Projection system, if a point P lies 30 mm above HP and 40 mm in front of VP, its top view p is located:",
+    "options": [
+      "40 mm below XY line",
+      "30 mm above XY line",
+      "40 mm above XY line",
+      "30 mm below XY line"
+    ],
+    "correctOption": 0,
+    "explanation": "In 1st angle projection, HP is rotated 90 degrees clockwise down. Top view distance from VP (40 mm) projects onto HP and appears 40 mm below the reference XY line.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u1_2",
+    "subjectId": "eg",
+    "unitNumber": 1,
+    "topic": "Projection of Straight Lines & True Length",
+    "questionText": "If a straight line AB is parallel to both the Horizontal Plane (HP) and Vertical Plane (VP), its projections in front view and top view are:",
+    "options": [
+      "Both parallel to the XY line and show True Length",
+      "Perpendicular to XY line",
+      "Points on XY line",
+      "Inclined at 45 degrees to XY"
+    ],
+    "correctOption": 0,
+    "explanation": "When a line is parallel to both reference planes, neither view foreshortens, so both front and top views are parallel lines to XY displaying the true length (TL).",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u2_1",
+    "subjectId": "eg",
+    "unitNumber": 2,
+    "topic": "Projection of Planes",
+    "questionText": "When a circular plane of diameter D is inclined to HP and perpendicular to VP, its top view is:",
+    "options": [
+      "An Ellipse with major axis = D",
+      "A Circle of diameter D",
+      "A Straight line inclined to XY",
+      "A Parabola"
+    ],
+    "correctOption": 0,
+    "explanation": "The diameter parallel to VP retains its true dimension D (major axis), while diameters perpendicular foreshorten by cos(theta), generating an ellipse in the top view.",
+    "normalTimeSeconds": 110,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u3_1",
+    "subjectId": "eg",
+    "unitNumber": 3,
+    "topic": "Engineering Curves - Conics",
+    "questionText": "If the eccentricity of a conic section e = 1, the curve generated is a:",
+    "options": [
+      "Parabola",
+      "Ellipse (e < 1)",
+      "Hyperbola (e > 1)",
+      "Circle (e = 0)"
+    ],
+    "correctOption": 0,
+    "explanation": "By definition of conic sections: e = 0 for circle, e < 1 for ellipse, e = 1 for parabola, and e > 1 for hyperbola.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u3_2",
+    "subjectId": "eg",
+    "unitNumber": 3,
+    "topic": "Development of Lateral Surfaces",
+    "questionText": "The development of the lateral surface of a right circular cone of base radius r and slant height L is a sector of a circle with subtended angle theta equal to:",
+    "options": [
+      "(r / L) * 360 degrees",
+      "(L / r) * 360 degrees",
+      "(r / L) * 180 degrees",
+      "2 * pi * r * L"
+    ],
+    "correctOption": 0,
+    "explanation": "Arc length of sector equals circumference of base: L * theta (in radians) = 2*pi*r => theta = (r / L) * 360°.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u4_1",
+    "subjectId": "eg",
+    "unitNumber": 4,
+    "topic": "Orthographic Projections",
+    "questionText": "In First Angle orthographic projection, where is the Left Hand Side View placed relative to the Front View?",
+    "options": [
+      "To the Right of the Front View",
+      "To the Left of the Front View",
+      "Above the Front View",
+      "Below the Front View"
+    ],
+    "correctOption": 0,
+    "explanation": "In 1st angle projection, the observer looks from the left, projects onto the plane situated on the opposite side, placing the Left Hand Side View to the right of the Front View.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u5_1",
+    "subjectId": "eg",
+    "unitNumber": 5,
+    "topic": "Isometric Projection & Isometric Scale",
+    "questionText": "The ratio of Isometric Length to True Length (Isometric Scale factor) is approximately:",
+    "options": [
+      "sqrt(2/3) approx 0.816",
+      "sqrt(3/2) approx 1.225",
+      "0.707",
+      "0.866"
+    ],
+    "correctOption": 0,
+    "explanation": "Isometric length / True length = cos(45°) / cos(30°) = (1/sqrt(2)) / (sqrt(3)/2) = sqrt(2/3) approx 0.8164 (or 81.6%).",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  }
+]

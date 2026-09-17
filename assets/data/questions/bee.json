@@ -1,0 +1,142 @@
+[
+  {
+    "id": "q_bee_u1_1",
+    "subjectId": "bee",
+    "unitNumber": 1,
+    "topic": "DC Circuits & Superposition Theorem",
+    "questionText": "When applying Superposition Theorem to analyze a linear circuit, ideal voltage sources not under consideration are replaced by:",
+    "options": [
+      "Short circuit (zero internal resistance)",
+      "Open circuit (infinite resistance)",
+      "Resistor equal to load",
+      "Current source"
+    ],
+    "correctOption": 0,
+    "explanation": "An ideal independent voltage source has zero internal impedance, so deactivating it is equivalent to replacing it with a short circuit.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u1_2",
+    "subjectId": "bee",
+    "unitNumber": 1,
+    "topic": "Star-Delta Transformation",
+    "questionText": "Three equal resistors of resistance R are connected in Star. What is the equivalent resistance in each arm of the Delta network?",
+    "options": [
+      "3 * R",
+      "R / 3",
+      "R",
+      "sqrt(3) * R"
+    ],
+    "correctOption": 0,
+    "explanation": "R_delta = R_a + R_b + (R_a*R_b)/R_c. For equal resistors R, R_delta = R + R + (R*R)/R = 3R.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u2_1",
+    "subjectId": "bee",
+    "unitNumber": 2,
+    "topic": "Electromagnetism & Faraday's Laws",
+    "questionText": "The magnitude of dynamically induced EMF in a conductor of length L moving with velocity v perpendicular to magnetic field B is:",
+    "options": [
+      "B * L * v",
+      "B * L / v",
+      "B^2 * L * v",
+      "0.5 * B * L * v^2"
+    ],
+    "correctOption": 0,
+    "explanation": "e = B * L * v * sin(theta). For perpendicular motion (theta = 90°), e = B * L * v.",
+    "normalTimeSeconds": 70,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u3_1",
+    "subjectId": "bee",
+    "unitNumber": 3,
+    "topic": "AC Fundamentals & Form Factor",
+    "questionText": "What is the Form Factor of a pure sinusoidal alternating voltage wave?",
+    "options": [
+      "1.11 (RMS / Average)",
+      "1.414 (Peak / RMS)",
+      "1.00",
+      "0.707"
+    ],
+    "correctOption": 0,
+    "explanation": "Form Factor = V_rms / V_avg = (V_m / sqrt(2)) / (2*V_m / pi) = pi / (2 * sqrt(2)) approx 1.11.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u4_1",
+    "subjectId": "bee",
+    "unitNumber": 4,
+    "topic": "Series RLC Resonance",
+    "questionText": "In a series RLC circuit at resonant frequency f_0, what is the net circuit impedance Z?",
+    "options": [
+      "Z = R (Purely resistive, minimum impedance)",
+      "Z = 0",
+      "Z = infinity",
+      "Z = sqrt(R^2 + (omega*L)^2)"
+    ],
+    "correctOption": 0,
+    "explanation": "At resonance, inductive reactance X_L equals capacitive reactance X_C, canceling each other out. Hence Z = R with power factor cos(phi) = 1.0.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_bee_u4_2",
+    "subjectId": "bee",
+    "unitNumber": 4,
+    "topic": "3-Phase Star Connection Relations",
+    "questionText": "In a balanced 3-phase star-connected AC load, the relationship between line voltage V_L and phase voltage V_ph is:",
+    "options": [
+      "V_L = sqrt(3) * V_ph",
+      "V_L = V_ph",
+      "V_L = V_ph / sqrt(3)",
+      "V_L = 3 * V_ph"
+    ],
+    "correctOption": 0,
+    "explanation": "In star connection, line voltage is the phasor difference between two phase voltages: V_L = sqrt(3) * V_ph, while line current I_L = I_ph.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u5_1",
+    "subjectId": "bee",
+    "unitNumber": 5,
+    "topic": "Single Phase Transformer EMF Equation",
+    "questionText": "The RMS value of induced EMF E1 in primary winding with N1 turns at frequency f and maximum core flux phi_m is:",
+    "options": [
+      "4.44 * f * N1 * phi_m",
+      "4.00 * f * N1 * phi_m",
+      "2.22 * f * N1 * phi_m",
+      "2 * pi * f * N1 * phi_m"
+    ],
+    "correctOption": 0,
+    "explanation": "Average EMF = 4 * f * phi_m * N1. Multiplying by form factor (1.11) gives RMS EMF = 4.44 * f * phi_m * N1.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  }
+]

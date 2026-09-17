@@ -1,0 +1,194 @@
+[
+  {
+    "id": "m1",
+    "name": "Engineering Mathematics - I",
+    "code": "BSC-101-BES",
+    "emoji": "📐",
+    "color": "#286983",
+    "semester": 1,
+    "teachingHours": 40,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Single Variable Calculus", "hours": 8, "weightage": "High"},
+      {"unitNumber": 2, "name": "Partial Differentiation", "hours": 8, "weightage": "High"},
+      {"unitNumber": 3, "name": "Applications of Partial Diff", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Linear Algebra & Matrices", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Eigen Values & Diagonalization", "hours": 8, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "physics",
+    "name": "Engineering Physics",
+    "code": "BSC-102-BES",
+    "emoji": "⚛️",
+    "color": "#56949f",
+    "semester": 1,
+    "teachingHours": 40,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Wave Optics & Thin Films", "hours": 8, "weightage": "Medium"},
+      {"unitNumber": 2, "name": "Diffraction & Polarization", "hours": 8, "weightage": "High"},
+      {"unitNumber": 3, "name": "Quantum Physics & Photonic Devices", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Semiconductors & Superconductivity", "hours": 8, "weightage": "Medium"},
+      {"unitNumber": 5, "name": "Nanomaterials & Ultrasonics", "hours": 8, "weightage": "Medium"}
+    ]
+  },
+  {
+    "id": "bxe",
+    "name": "Basic Electronics Engineering",
+    "code": "ESC-101-ETC",
+    "emoji": "⚡",
+    "color": "#ea9d34",
+    "semester": 1,
+    "teachingHours": 38,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Diodes & Applications", "hours": 7, "weightage": "High"},
+      {"unitNumber": 2, "name": "BJT & FET Transistors", "hours": 8, "weightage": "High"},
+      {"unitNumber": 3, "name": "Operational Amplifiers (Op-Amp)", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Digital Electronics & Logic Gates", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Sensors & Communication Systems", "hours": 7, "weightage": "Medium"}
+    ]
+  },
+  {
+    "id": "eg",
+    "name": "Engineering Graphics",
+    "code": "ESC-103-MEC",
+    "emoji": "📏",
+    "color": "#d7827e",
+    "semester": 1,
+    "teachingHours": 30,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Drawing & Projection of Lines", "hours": 6, "weightage": "High"},
+      {"unitNumber": 2, "name": "Projection of Planes", "hours": 6, "weightage": "High"},
+      {"unitNumber": 3, "name": "Engineering Curves & Surfaces", "hours": 6, "weightage": "Medium"},
+      {"unitNumber": 4, "name": "Orthographic Projections", "hours": 6, "weightage": "High"},
+      {"unitNumber": 5, "name": "Isometric Projections", "hours": 6, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "fpl",
+    "name": "Fundamentals of Programming Languages",
+    "code": "ESC-105-COM",
+    "emoji": "💻",
+    "color": "#907aa9",
+    "semester": 1,
+    "teachingHours": 36,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Problem Solving & Flowcharts", "hours": 6, "weightage": "Medium"},
+      {"unitNumber": 2, "name": "Operators & Formatted I/O", "hours": 7, "weightage": "Medium"},
+      {"unitNumber": 3, "name": "Decision Making & Loops", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Arrays & Strings", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Functions & Pointers", "hours": 7, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "m2",
+    "name": "Engineering Mathematics - II",
+    "code": "BSC-151-BES",
+    "emoji": "📊",
+    "color": "#286983",
+    "semester": 2,
+    "teachingHours": 42,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Integral Calculus & Beta Gamma", "hours": 8, "weightage": "High"},
+      {"unitNumber": 2, "name": "Curve Tracing & Solid Geometry", "hours": 8, "weightage": "Medium"},
+      {"unitNumber": 3, "name": "Multiple Integrals", "hours": 9, "weightage": "High"},
+      {"unitNumber": 4, "name": "First Order ODE", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Applications of ODE", "hours": 9, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "chemistry",
+    "name": "Engineering Chemistry",
+    "code": "BSC-103-BES",
+    "emoji": "🧪",
+    "color": "#56949f",
+    "semester": 2,
+    "teachingHours": 40,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Water Technology", "hours": 8, "weightage": "High"},
+      {"unitNumber": 2, "name": "Instrumental Analysis", "hours": 8, "weightage": "Medium"},
+      {"unitNumber": 3, "name": "Advanced Materials & Polymers", "hours": 8, "weightage": "Medium"},
+      {"unitNumber": 4, "name": "Energy Sources & Batteries", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Corrosion & Prevention", "hours": 8, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "bee",
+    "name": "Basic Electrical Engineering",
+    "code": "ESC-102-ELE",
+    "emoji": "💡",
+    "color": "#ea9d34",
+    "semester": 2,
+    "teachingHours": 38,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "DC Circuits & Theorems", "hours": 8, "weightage": "High"},
+      {"unitNumber": 2, "name": "Electromagnetism & Circuits", "hours": 7, "weightage": "Medium"},
+      {"unitNumber": 3, "name": "Single Phase AC Circuits", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Three Phase AC Circuits", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "Transformers & Induction Motors", "hours": 7, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "mechanics",
+    "name": "Engineering Mechanics",
+    "code": "ESC-104-CVL",
+    "emoji": "⚙️",
+    "color": "#b4637a",
+    "semester": 2,
+    "teachingHours": 42,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Force Systems & Resultants", "hours": 8, "weightage": "High"},
+      {"unitNumber": 2, "name": "Equilibrium & Beams", "hours": 8, "weightage": "High"},
+      {"unitNumber": 3, "name": "Friction & Trusses", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Kinematics of Particles", "hours": 9, "weightage": "High"},
+      {"unitNumber": 5, "name": "Kinetics of Particles", "hours": 9, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "pps",
+    "name": "Programming & Problem Solving",
+    "code": "PCC-151-ITT",
+    "emoji": "🐍",
+    "color": "#907aa9",
+    "semester": 2,
+    "teachingHours": 38,
+    "isExcluded": false,
+    "units": [
+      {"unitNumber": 1, "name": "Python Basics & Flowcharts", "hours": 7, "weightage": "Medium"},
+      {"unitNumber": 2, "name": "Decision Control & Loops", "hours": 8, "weightage": "High"},
+      {"unitNumber": 3, "name": "Functions & Strings", "hours": 8, "weightage": "High"},
+      {"unitNumber": 4, "name": "Lists, Dictionaries & Tuples", "hours": 8, "weightage": "High"},
+      {"unitNumber": 5, "name": "File Handling & OOP", "hours": 7, "weightage": "High"}
+    ]
+  },
+  {
+    "id": "pcs",
+    "name": "Professional Communication Skills",
+    "code": "AEC-101-BES",
+    "emoji": "🗣️",
+    "color": "#797593",
+    "semester": 1,
+    "teachingHours": 20,
+    "isExcluded": true,
+    "units": []
+  },
+  {
+    "id": "dtil",
+    "name": "Design Thinking, Innovation & Leadership",
+    "code": "SEC-101-BES",
+    "emoji": "💡",
+    "color": "#797593",
+    "semester": 2,
+    "teachingHours": 20,
+    "isExcluded": true,
+    "units": []
+  }
+]

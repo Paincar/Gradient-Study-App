@@ -1,0 +1,102 @@
+[
+  {
+    "id": "q_pps_u1_1",
+    "subjectId": "pps",
+    "unitNumber": 1,
+    "topic": "Python Basics & Features",
+    "questionText": "In Python, which built-in function returns the memory address (identity) of an object?",
+    "options": [
+      "id()",
+      "type()",
+      "hash()",
+      "addr()"
+    ],
+    "correctOption": 0,
+    "explanation": "id(object) returns an integer representing its unique identity (the memory address in CPython implementation).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u2_1",
+    "subjectId": "pps",
+    "unitNumber": 2,
+    "topic": "Advanced Data Types & Slicing",
+    "questionText": "What is the output of the Python snippet: lst = [10, 20, 30, 40, 50]; print(lst[::-2])?",
+    "options": [
+      "[50, 30, 10]",
+      "[50, 40, 30]",
+      "[10, 30, 50]",
+      "[40, 20]"
+    ],
+    "correctOption": 0,
+    "explanation": "The slice [::-2] starts from the end of the list and steps backward by 2: indices 4 (50), 2 (30), 0 (10) -> [50, 30, 10].",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u3_1",
+    "subjectId": "pps",
+    "unitNumber": 3,
+    "topic": "Python Functions & Lambda Expressions",
+    "questionText": "What is the result of executing: (lambda x, y: x * y + 2)(3, 4)?",
+    "options": [
+      "14",
+      "24",
+      "10",
+      "9"
+    ],
+    "correctOption": 0,
+    "explanation": "The lambda expression evaluates 3 * 4 + 2 = 12 + 2 = 14.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u4_1",
+    "subjectId": "pps",
+    "unitNumber": 4,
+    "topic": "File Handling Modes in Python",
+    "questionText": "Which file open mode in Python opens a file for both reading and writing without truncating it?",
+    "options": [
+      "'r+'",
+      "'w+' (truncates file)",
+      "'a'",
+      "'x'"
+    ],
+    "correctOption": 0,
+    "explanation": "'r+' opens for reading and writing with file pointer at the beginning without truncating the existing content.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u5_1",
+    "subjectId": "pps",
+    "unitNumber": 5,
+    "topic": "Object Oriented Programming in Python",
+    "questionText": "In Python OOP, what special method is invoked automatically when a new instance of a class is created?",
+    "options": [
+      "__init__()",
+      "__new__()",
+      "__main__()",
+      "__create__()"
+    ],
+    "correctOption": 0,
+    "explanation": "__init__() is the constructor initializer method in Python classes, called right after the instance is created.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  }
+]

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "q_m1_u1_1",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Successive Differentiation & Leibnitz Theorem",
+    "questionText": "If y = sin(m * arcsin(x)), what is the coefficient of y_{n+1} in the Leibnitz expansion of (1 - x^2) y_{n+2}?",
+    "options": [
+      "-(2n + 1)x",
+      "+(2n + 1)x",
+      "-(2n - 1)x",
+      "+2nx"
+    ],
+    "correctOption": 0,
+    "explanation": "Differentiating (1-x^2)y_1^2 = m^2(1-y^2) and applying Leibnitz theorem n times gives (1-x^2)y_{n+2} - (2n+1)x y_{n+1} + (m^2 - n^2)y_n = 0. Hence the coefficient of y_{n+1} is -(2n+1)x.",
+    "normalTimeSeconds": 180,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u1_2",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Taylor's & Maclaurin's Series",
+    "questionText": "In the Maclaurin expansion of log(1 + x), what is the coefficient of x^4?",
+    "options": [
+      "-1/4",
+      "1/4",
+      "-1/24",
+      "1/24"
+    ],
+    "correctOption": 0,
+    "explanation": "The Maclaurin series for log(1+x) is x - x^2/2 + x^3/3 - x^4/4 + ... Therefore, the coefficient of x^4 is -1/4.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u1_3",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Indeterminate Forms & L'Hospital's Rule",
+    "questionText": "Evaluate the limit lim_{x -> 0} (tan(x) - x) / x^3.",
+    "options": [
+      "1/3",
+      "1/2",
+      "0",
+      "1/6"
+    ],
+    "correctOption": 0,
+    "explanation": "Applying Taylor expansion: tan(x) = x + x^3/3 + 2x^5/15. (tan(x) - x)/x^3 = (x^3/3)/x^3 = 1/3.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u1_4",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Fourier Series & Half Range Expansion",
+    "questionText": "For a half-range cosine Fourier series of f(x) in (0, L), what is the formula for the Fourier coefficient a_n?",
+    "options": [
+      "(2/L) * integral_0^L f(x) cos(n*pi*x/L) dx",
+      "(1/L) * integral_0^L f(x) cos(n*pi*x/L) dx",
+      "(2/L) * integral_0^L f(x) sin(n*pi*x/L) dx",
+      "(1/2L) * integral_0^L f(x) cos(n*pi*x/L) dx"
+    ],
+    "correctOption": 0,
+    "explanation": "By definition of half-range cosine series on (0, L), the even extension over (-L, L) yields a_n = (2/L) * integral_0^L f(x) cos(n*pi*x/L) dx.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u2_1",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Euler's Theorem on Homogeneous Functions",
+    "questionText": "If u = arcsin((x^2 + y^2) / (x + y)), then x*(du/dx) + y*(du/dy) equals:",
+    "options": [
+      "tan(u)",
+      "sin(u)",
+      "cos(u)",
+      "cot(u)"
+    ],
+    "correctOption": 0,
+    "explanation": "Let z = sin(u) = (x^2 + y^2)/(x + y). z is homogeneous of degree 2-1 = 1. By Euler's theorem, x(dz/dx) + y(dz/dy) = 1*z. Since dz/dx = cos(u)(du/dx), cos(u)[x(du/dx) + y(du/dy)] = sin(u) => x(du/dx) + y(du/dy) = tan(u).",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u2_2",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Total Derivative & Composite Functions",
+    "questionText": "If z = f(x, y) where x = e^u + e^-v and y = e^-u - e^v, then (dz/du) equals:",
+    "options": [
+      "e^u*(dz/dx) - e^-u*(dz/dy)",
+      "x*(dz/dx) - y*(dz/dy)",
+      "(dz/dx) + (dz/dy)",
+      "e^-v*(dz/dx) + e^v*(dz/dy)"
+    ],
+    "correctOption": 0,
+    "explanation": "By chain rule for composite functions: dz/du = (dz/dx)*(dx/du) + (dz/dy)*(dy/du). Here dx/du = e^u and dy/du = -e^-u. Thus dz/du = e^u*(dz/dx) - e^-u*(dz/dy).",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u2_3",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Partial Differentiation & Limit Continuity",
+    "questionText": "If u = log(x^3 + y^3 + z^3 - 3xyz), what is (du/dx + du/dy + du/dz)?",
+    "options": [
+      "3 / (x + y + z)",
+      "1 / (x + y + z)",
+      "3(x + y + z)",
+      "0"
+    ],
+    "correctOption": 0,
+    "explanation": "Note x^3 + y^3 + z^3 - 3xyz = (x+y+z)(x^2+y^2+z^2-xy-yz-zx). Taking partial derivatives du/dx + du/dy + du/dz = [3(x^2+y^2+z^2-xy-yz-zx)] / [(x+y+z)(x^2+y^2+z^2-xy-yz-zx)] = 3 / (x + y + z).",
+    "normalTimeSeconds": 180,
+    "difficulty": "Hard",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u3_1",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Jacobians & Approximations",
+    "questionText": "If x = r * cos(theta) and y = r * sin(theta), the Jacobian J = d(x, y) / d(r, theta) is:",
+    "options": [
+      "r",
+      "r^2",
+      "1/r",
+      "r * sin(theta)"
+    ],
+    "correctOption": 0,
+    "explanation": "J = det([dx/dr, dx/dtheta; dy/dr, dy/dtheta]) = det([cos(theta), -r*sin(theta); sin(theta), r*cos(theta)]) = r*cos^2(theta) + r*sin^2(theta) = r.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u3_2",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Errors & Approximations",
+    "questionText": "The period of a simple pendulum is T = 2*pi*sqrt(l/g). If l increases by 2% and g decreases by 1%, what is the percentage change in T?",
+    "options": [
+      "+1.5%",
+      "+0.5%",
+      "+3.0%",
+      "-1.0%"
+    ],
+    "correctOption": 0,
+    "explanation": "log(T) = log(2*pi) + 0.5*log(l) - 0.5*log(g). dT/T = 0.5*(dl/l) - 0.5*(dg/g) = 0.5*(+2%) - 0.5*(-1%) = 1% + 0.5% = +1.5%.",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u3_3",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Maxima & Minima & Lagrange Multipliers",
+    "questionText": "For a stationary point of f(x, y), let r = f_xx, s = f_xy, and t = f_yy. If rt - s^2 > 0 and r < 0, the point is a:",
+    "options": [
+      "Local Maximum",
+      "Local Minimum",
+      "Saddle Point",
+      "Inconclusive"
+    ],
+    "correctOption": 0,
+    "explanation": "By second derivative test for two variables, if rt - s^2 > 0 and r < 0, the function attains a local maximum.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u4_1",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Rank of Matrix & Consistency of Linear System",
+    "questionText": "A system of m linear equations in n unknowns AX = B is consistent with a unique solution if and only if:",
+    "options": [
+      "Rank(A) = Rank(A|B) = n",
+      "Rank(A) = Rank(A|B) < n",
+      "Rank(A) != Rank(A|B)",
+      "Rank(A) = m < n"
+    ],
+    "correctOption": 0,
+    "explanation": "By Rouché–Capelli theorem, consistency requires Rank(A) = Rank(A|B). For a unique solution, this common rank must equal the number of unknowns n.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u4_2",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Linear Dependence & Independence",
+    "questionText": "Vectors X1 = (1, 2, 3), X2 = (2, -1, 4), X3 = (0, 5, 2) are linearly dependent if the determinant of matrix [X1; X2; X3] is:",
+    "options": [
+      "Zero",
+      "Non-zero",
+      "Positive definite",
+      "Identity"
+    ],
+    "correctOption": 0,
+    "explanation": "A set of n vectors in R^n is linearly dependent if and only if the matrix formed by taking the vectors as rows (or columns) has determinant equal to zero.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u4_3",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Orthogonal Transformations",
+    "questionText": "If matrix A is an orthogonal matrix, then det(A) must be:",
+    "options": [
+      "+1 or -1",
+      "0",
+      "Any positive scalar",
+      "Trace of A"
+    ],
+    "correctOption": 0,
+    "explanation": "For an orthogonal matrix, A * A^T = I. Taking determinants: det(A) * det(A^T) = [det(A)]^2 = det(I) = 1 => det(A) = +/- 1.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2022,
+    "exam": "SPPU End-Sem 2022",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u5_1",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Eigenvalues & Cayley-Hamilton Theorem",
+    "questionText": "If the eigenvalues of a 3x3 matrix A are 1, 2, and 3, what is the determinant of A^2?",
+    "options": [
+      "36",
+      "6",
+      "14",
+      "72"
+    ],
+    "correctOption": 0,
+    "explanation": "det(A) is the product of eigenvalues: 1 * 2 * 3 = 6. det(A^2) = (det(A))^2 = 6^2 = 36.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u5_2",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Cayley-Hamilton Theorem Application",
+    "questionText": "If matrix A satisfies A^2 - 4A + 3I = 0, what is A^-1 expressed in terms of A?",
+    "options": [
+      "(4I - A) / 3",
+      "(A - 4I) / 3",
+      "3I - 4A",
+      "(4A - 3I) / 4"
+    ],
+    "correctOption": 0,
+    "explanation": "Multiplying by A^-1: A - 4I + 3*A^-1 = 0 => 3*A^-1 = 4I - A => A^-1 = (4I - A) / 3.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u5_3",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Diagonalization & Quadratic Forms",
+    "questionText": "A real symmetric matrix A can always be diagonalized by which type of transformation matrix?",
+    "options": [
+      "Orthogonal Matrix",
+      "Nilpotent Matrix",
+      "Skew-symmetric Matrix",
+      "Singular Matrix"
+    ],
+    "correctOption": 0,
+    "explanation": "By the Spectral Theorem, every real symmetric matrix has real eigenvalues and mutually orthogonal eigenvectors, hence it is orthogonally diagonalizable: P^T * A * P = D, where P is orthogonal.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  }
+]

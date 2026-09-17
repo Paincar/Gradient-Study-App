@@ -1,0 +1,242 @@
+[
+  {
+    "id": "q_phy_u1_1",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Lasers & Population Inversion",
+    "questionText": "In a 3-level or 4-level laser system, what condition is mandatory between the metastable state and ground state for laser action?",
+    "options": [
+      "N2 > N1 (Population Inversion)",
+      "N1 > N2 (Thermal Equilibrium)",
+      "Spontaneous emission dominant",
+      "Stimulated absorption = 0"
+    ],
+    "correctOption": 0,
+    "explanation": "Laser action requires amplification, which occurs only when the population of atoms in the upper excited metastable state (N2) exceeds that in the lower state (N1), called population inversion.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u1_2",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Optical Fibers & Numerical Aperture",
+    "questionText": "An optical fiber has core refractive index n1 = 1.50 and cladding index n2 = 1.45. What is its Numerical Aperture (NA)?",
+    "options": [
+      "0.384",
+      "0.225",
+      "0.550",
+      "0.145"
+    ],
+    "correctOption": 0,
+    "explanation": "NA = sqrt(n1^2 - n2^2) = sqrt(1.50^2 - 1.45^2) = sqrt(2.25 - 2.1025) = sqrt(0.1475) approx 0.384.",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_phy_u1_3",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Holography Principle & Applications",
+    "questionText": "Unlike standard photography which records only intensity, holography records:",
+    "options": [
+      "Both amplitude and phase of light wave",
+      "Only phase of light wave",
+      "Only frequency of light wave",
+      "Wavelength only"
+    ],
+    "correctOption": 0,
+    "explanation": "Holography uses interference between a reference beam and an object beam to record both amplitude and phase information on the photographic plate.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_1",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "de Broglie Hypothesis & Matter Waves",
+    "questionText": "What is the de Broglie wavelength of an electron accelerated through an electrical potential difference of V volts?",
+    "options": [
+      "12.27 / sqrt(V) Angstroms",
+      "1.227 / V Angstroms",
+      "0.286 / sqrt(V) Angstroms",
+      "150 * V Angstroms"
+    ],
+    "correctOption": 0,
+    "explanation": "lambda = h / p = h / sqrt(2*m*e*V) = 1.227 nm / sqrt(V) = 12.27 / sqrt(V) Angstroms.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_2",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "Schrödinger Equation & Particle in a Box",
+    "questionText": "For a particle in an infinitely deep 1D potential well of width L, the energy eigenvalues E_n are proportional to:",
+    "options": [
+      "n^2",
+      "n",
+      "1/n",
+      "sqrt(n)"
+    ],
+    "correctOption": 0,
+    "explanation": "E_n = (n^2 * h^2) / (8 * m * L^2), showing energy eigenvalues are directly proportional to n^2 (quantized).",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_3",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "Quantum Tunneling & Qubits",
+    "questionText": "In quantum computing, what property allows a qubit to represent both |0> and |1> simultaneously?",
+    "options": [
+      "Quantum Superposition",
+      "Pauli Exclusion",
+      "Tunneling Decay",
+      "Quantum Confinement"
+    ],
+    "correctOption": 0,
+    "explanation": "Quantum superposition allows a state |psi> = alpha|0> + beta|1> where |alpha|^2 + |beta|^2 = 1.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u3_1",
+    "subjectId": "physics",
+    "unitNumber": 3,
+    "topic": "Thin Film Interference & Anti-Reflection Coating",
+    "questionText": "What is the condition for destructive interference in a thin film of refractive index mu and thickness t in reflected light at normal incidence?",
+    "options": [
+      "2 * mu * t = n * lambda",
+      "2 * mu * t = (2n + 1) * lambda / 2",
+      "mu * t = n * lambda",
+      "2 * mu * t * cos(r) = 0"
+    ],
+    "correctOption": 0,
+    "explanation": "Due to phase reversal (pi shift or lambda/2 path change) on reflection from a denser medium, total path difference is 2*mu*t - lambda/2. For destructive interference: 2*mu*t - lambda/2 = (2n-1)*lambda/2 => 2*mu*t = n*lambda.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_phy_u3_2",
+    "subjectId": "physics",
+    "unitNumber": 3,
+    "topic": "Polarization & Malus' Law",
+    "questionText": "Unpolarized light passes through two polarizers whose transmission axes are angled at 60 degrees. If incident intensity is I_0, transmitted intensity is:",
+    "options": [
+      "I_0 / 8",
+      "I_0 / 4",
+      "3 * I_0 / 8",
+      "I_0 / 2"
+    ],
+    "correctOption": 0,
+    "explanation": "After the 1st polarizer, I1 = I_0 / 2. By Malus' Law for the 2nd polarizer: I2 = I1 * cos^2(60°) = (I_0 / 2) * (1/2)^2 = I_0 / 8.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_phy_u4_1",
+    "subjectId": "physics",
+    "unitNumber": 4,
+    "topic": "Hall Effect & Hall Coefficient",
+    "questionText": "For an n-type semiconductor with charge carrier concentration n and electronic charge e, the Hall coefficient R_H is given by:",
+    "options": [
+      "-1 / (n * e)",
+      "+1 / (n * e)",
+      "-n * e",
+      "mu / (n * e)"
+    ],
+    "correctOption": 0,
+    "explanation": "R_H = -1 / (n * e). The negative sign signifies electrons as the majority charge carriers in n-type semiconductor.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_phy_u4_2",
+    "subjectId": "physics",
+    "unitNumber": 4,
+    "topic": "Ultrasonics & Piezoelectric Generator",
+    "questionText": "Ultrasonic waves are produced in quartz crystals using which fundamental physical principle?",
+    "options": [
+      "Inverse Piezoelectric Effect",
+      "Magnetostriction Effect",
+      "Hall Effect",
+      "Doppler Effect"
+    ],
+    "correctOption": 0,
+    "explanation": "Applying a high-frequency alternating electric field across opposite faces of a quartz crystal causes alternating mechanical expansions and contractions (Inverse Piezoelectric effect), producing ultrasonic vibrations.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u5_1",
+    "subjectId": "physics",
+    "unitNumber": 5,
+    "topic": "Superconductivity & Meissner Effect",
+    "questionText": "When a material enters the superconducting state below its critical temperature T_c, the magnetic induction B inside the material becomes:",
+    "options": [
+      "Zero (Perfect Diamagnetism)",
+      "Maximum (Ferromagnetic)",
+      "Infinite",
+      "Equal to applied field"
+    ],
+    "correctOption": 0,
+    "explanation": "The Meissner effect states that a superconductor expels all magnetic flux lines below T_c, so B = 0 inside, showing chi = -1 (perfect diamagnetism).",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u5_2",
+    "subjectId": "physics",
+    "unitNumber": 5,
+    "topic": "Quantum Confinement in Nanomaterials",
+    "questionText": "As the physical dimension of a semiconductor nanoparticle decreases below its Bohr exciton radius, its band gap energy:",
+    "options": [
+      "Increases (Blue Shift)",
+      "Decreases (Red Shift)",
+      "Remains constant",
+      "Drops to zero"
+    ],
+    "correctOption": 0,
+    "explanation": "Due to quantum confinement, electron energy levels become discrete like atoms, widening the effective band gap E_g and causing an optical blue shift.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  }
+]

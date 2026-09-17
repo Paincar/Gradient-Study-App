@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "q_m1_u1_1",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Successive Differentiation & Leibnitz Theorem",
+    "questionText": "If y = sin(m * arcsin(x)), what is the coefficient of y_{n+1} in the Leibnitz expansion of (1 - x^2) y_{n+2}?",
+    "options": [
+      "-(2n + 1)x",
+      "+(2n + 1)x",
+      "-(2n - 1)x",
+      "+2nx"
+    ],
+    "correctOption": 0,
+    "explanation": "Differentiating (1-x^2)y_1^2 = m^2(1-y^2) and applying Leibnitz theorem n times gives (1-x^2)y_{n+2} - (2n+1)x y_{n+1} + (m^2 - n^2)y_n = 0. Hence the coefficient of y_{n+1} is -(2n+1)x.",
+    "normalTimeSeconds": 180,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u1_2",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Taylor's & Maclaurin's Series",
+    "questionText": "In the Maclaurin expansion of log(1 + x), what is the coefficient of x^4?",
+    "options": [
+      "-1/4",
+      "1/4",
+      "-1/24",
+      "1/24"
+    ],
+    "correctOption": 0,
+    "explanation": "The Maclaurin series for log(1+x) is x - x^2/2 + x^3/3 - x^4/4 + ... Therefore, the coefficient of x^4 is -1/4.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u1_3",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Indeterminate Forms & L'Hospital's Rule",
+    "questionText": "Evaluate the limit lim_{x -> 0} (tan(x) - x) / x^3.",
+    "options": [
+      "1/3",
+      "1/2",
+      "0",
+      "1/6"
+    ],
+    "correctOption": 0,
+    "explanation": "Applying Taylor expansion: tan(x) = x + x^3/3 + 2x^5/15. (tan(x) - x)/x^3 = (x^3/3)/x^3 = 1/3.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u1_4",
+    "subjectId": "m1",
+    "unitNumber": 1,
+    "topic": "Fourier Series & Half Range Expansion",
+    "questionText": "For a half-range cosine Fourier series of f(x) in (0, L), what is the formula for the Fourier coefficient a_n?",
+    "options": [
+      "(2/L) * integral_0^L f(x) cos(n*pi*x/L) dx",
+      "(1/L) * integral_0^L f(x) cos(n*pi*x/L) dx",
+      "(2/L) * integral_0^L f(x) sin(n*pi*x/L) dx",
+      "(1/2L) * integral_0^L f(x) cos(n*pi*x/L) dx"
+    ],
+    "correctOption": 0,
+    "explanation": "By definition of half-range cosine series on (0, L), the even extension over (-L, L) yields a_n = (2/L) * integral_0^L f(x) cos(n*pi*x/L) dx.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u2_1",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Euler's Theorem on Homogeneous Functions",
+    "questionText": "If u = arcsin((x^2 + y^2) / (x + y)), then x*(du/dx) + y*(du/dy) equals:",
+    "options": [
+      "tan(u)",
+      "sin(u)",
+      "cos(u)",
+      "cot(u)"
+    ],
+    "correctOption": 0,
+    "explanation": "Let z = sin(u) = (x^2 + y^2)/(x + y). z is homogeneous of degree 2-1 = 1. By Euler's theorem, x(dz/dx) + y(dz/dy) = 1*z. Since dz/dx = cos(u)(du/dx), cos(u)[x(du/dx) + y(du/dy)] = sin(u) => x(du/dx) + y(du/dy) = tan(u).",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u2_2",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Total Derivative & Composite Functions",
+    "questionText": "If z = f(x, y) where x = e^u + e^-v and y = e^-u - e^v, then (dz/du) equals:",
+    "options": [
+      "e^u*(dz/dx) - e^-u*(dz/dy)",
+      "x*(dz/dx) - y*(dz/dy)",
+      "(dz/dx) + (dz/dy)",
+      "e^-v*(dz/dx) + e^v*(dz/dy)"
+    ],
+    "correctOption": 0,
+    "explanation": "By chain rule for composite functions: dz/du = (dz/dx)*(dx/du) + (dz/dy)*(dy/du). Here dx/du = e^u and dy/du = -e^-u. Thus dz/du = e^u*(dz/dx) - e^-u*(dz/dy).",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u2_3",
+    "subjectId": "m1",
+    "unitNumber": 2,
+    "topic": "Partial Differentiation & Limit Continuity",
+    "questionText": "If u = log(x^3 + y^3 + z^3 - 3xyz), what is (du/dx + du/dy + du/dz)?",
+    "options": [
+      "3 / (x + y + z)",
+      "1 / (x + y + z)",
+      "3(x + y + z)",
+      "0"
+    ],
+    "correctOption": 0,
+    "explanation": "Note x^3 + y^3 + z^3 - 3xyz = (x+y+z)(x^2+y^2+z^2-xy-yz-zx). Taking partial derivatives du/dx + du/dy + du/dz = [3(x^2+y^2+z^2-xy-yz-zx)] / [(x+y+z)(x^2+y^2+z^2-xy-yz-zx)] = 3 / (x + y + z).",
+    "normalTimeSeconds": 180,
+    "difficulty": "Hard",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 5
+  },
+  {
+    "id": "q_m1_u3_1",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Jacobians & Approximations",
+    "questionText": "If x = r * cos(theta) and y = r * sin(theta), the Jacobian J = d(x, y) / d(r, theta) is:",
+    "options": [
+      "r",
+      "r^2",
+      "1/r",
+      "r * sin(theta)"
+    ],
+    "correctOption": 0,
+    "explanation": "J = det([dx/dr, dx/dtheta; dy/dr, dy/dtheta]) = det([cos(theta), -r*sin(theta); sin(theta), r*cos(theta)]) = r*cos^2(theta) + r*sin^2(theta) = r.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u3_2",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Errors & Approximations",
+    "questionText": "The period of a simple pendulum is T = 2*pi*sqrt(l/g). If l increases by 2% and g decreases by 1%, what is the percentage change in T?",
+    "options": [
+      "+1.5%",
+      "+0.5%",
+      "+3.0%",
+      "-1.0%"
+    ],
+    "correctOption": 0,
+    "explanation": "log(T) = log(2*pi) + 0.5*log(l) - 0.5*log(g). dT/T = 0.5*(dl/l) - 0.5*(dg/g) = 0.5*(+2%) - 0.5*(-1%) = 1% + 0.5% = +1.5%.",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u3_3",
+    "subjectId": "m1",
+    "unitNumber": 3,
+    "topic": "Maxima & Minima & Lagrange Multipliers",
+    "questionText": "For a stationary point of f(x, y), let r = f_xx, s = f_xy, and t = f_yy. If rt - s^2 > 0 and r < 0, the point is a:",
+    "options": [
+      "Local Maximum",
+      "Local Minimum",
+      "Saddle Point",
+      "Inconclusive"
+    ],
+    "correctOption": 0,
+    "explanation": "By second derivative test for two variables, if rt - s^2 > 0 and r < 0, the function attains a local maximum.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u4_1",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Rank of Matrix & Consistency of Linear System",
+    "questionText": "A system of m linear equations in n unknowns AX = B is consistent with a unique solution if and only if:",
+    "options": [
+      "Rank(A) = Rank(A|B) = n",
+      "Rank(A) = Rank(A|B) < n",
+      "Rank(A) != Rank(A|B)",
+      "Rank(A) = m < n"
+    ],
+    "correctOption": 0,
+    "explanation": "By Rouché–Capelli theorem, consistency requires Rank(A) = Rank(A|B). For a unique solution, this common rank must equal the number of unknowns n.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u4_2",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Linear Dependence & Independence",
+    "questionText": "Vectors X1 = (1, 2, 3), X2 = (2, -1, 4), X3 = (0, 5, 2) are linearly dependent if the determinant of matrix [X1; X2; X3] is:",
+    "options": [
+      "Zero",
+      "Non-zero",
+      "Positive definite",
+      "Identity"
+    ],
+    "correctOption": 0,
+    "explanation": "A set of n vectors in R^n is linearly dependent if and only if the matrix formed by taking the vectors as rows (or columns) has determinant equal to zero.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u4_3",
+    "subjectId": "m1",
+    "unitNumber": 4,
+    "topic": "Orthogonal Transformations",
+    "questionText": "If matrix A is an orthogonal matrix, then det(A) must be:",
+    "options": [
+      "+1 or -1",
+      "0",
+      "Any positive scalar",
+      "Trace of A"
+    ],
+    "correctOption": 0,
+    "explanation": "For an orthogonal matrix, A * A^T = I. Taking determinants: det(A) * det(A^T) = [det(A)]^2 = det(I) = 1 => det(A) = +/- 1.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2022,
+    "exam": "SPPU End-Sem 2022",
+    "marks": 2
+  },
+  {
+    "id": "q_m1_u5_1",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Eigenvalues & Cayley-Hamilton Theorem",
+    "questionText": "If the eigenvalues of a 3x3 matrix A are 1, 2, and 3, what is the determinant of A^2?",
+    "options": [
+      "36",
+      "6",
+      "14",
+      "72"
+    ],
+    "correctOption": 0,
+    "explanation": "det(A) is the product of eigenvalues: 1 * 2 * 3 = 6. det(A^2) = (det(A))^2 = 6^2 = 36.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m1_u5_2",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Cayley-Hamilton Theorem Application",
+    "questionText": "If matrix A satisfies A^2 - 4A + 3I = 0, what is A^-1 expressed in terms of A?",
+    "options": [
+      "(4I - A) / 3",
+      "(A - 4I) / 3",
+      "3I - 4A",
+      "(4A - 3I) / 4"
+    ],
+    "correctOption": 0,
+    "explanation": "Multiplying by A^-1: A - 4I + 3*A^-1 = 0 => 3*A^-1 = 4I - A => A^-1 = (4I - A) / 3.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m1_u5_3",
+    "subjectId": "m1",
+    "unitNumber": 5,
+    "topic": "Diagonalization & Quadratic Forms",
+    "questionText": "A real symmetric matrix A can always be diagonalized by which type of transformation matrix?",
+    "options": [
+      "Orthogonal Matrix",
+      "Nilpotent Matrix",
+      "Skew-symmetric Matrix",
+      "Singular Matrix"
+    ],
+    "correctOption": 0,
+    "explanation": "By the Spectral Theorem, every real symmetric matrix has real eigenvalues and mutually orthogonal eigenvectors, hence it is orthogonally diagonalizable: P^T * A * P = D, where P is orthogonal.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u1_1",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Lasers & Population Inversion",
+    "questionText": "In a 3-level or 4-level laser system, what condition is mandatory between the metastable state and ground state for laser action?",
+    "options": [
+      "N2 > N1 (Population Inversion)",
+      "N1 > N2 (Thermal Equilibrium)",
+      "Spontaneous emission dominant",
+      "Stimulated absorption = 0"
+    ],
+    "correctOption": 0,
+    "explanation": "Laser action requires amplification, which occurs only when the population of atoms in the upper excited metastable state (N2) exceeds that in the lower state (N1), called population inversion.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u1_2",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Optical Fibers & Numerical Aperture",
+    "questionText": "An optical fiber has core refractive index n1 = 1.50 and cladding index n2 = 1.45. What is its Numerical Aperture (NA)?",
+    "options": [
+      "0.384",
+      "0.225",
+      "0.550",
+      "0.145"
+    ],
+    "correctOption": 0,
+    "explanation": "NA = sqrt(n1^2 - n2^2) = sqrt(1.50^2 - 1.45^2) = sqrt(2.25 - 2.1025) = sqrt(0.1475) approx 0.384.",
+    "normalTimeSeconds": 150,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_phy_u1_3",
+    "subjectId": "physics",
+    "unitNumber": 1,
+    "topic": "Holography Principle & Applications",
+    "questionText": "Unlike standard photography which records only intensity, holography records:",
+    "options": [
+      "Both amplitude and phase of light wave",
+      "Only phase of light wave",
+      "Only frequency of light wave",
+      "Wavelength only"
+    ],
+    "correctOption": 0,
+    "explanation": "Holography uses interference between a reference beam and an object beam to record both amplitude and phase information on the photographic plate.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_1",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "de Broglie Hypothesis & Matter Waves",
+    "questionText": "What is the de Broglie wavelength of an electron accelerated through an electrical potential difference of V volts?",
+    "options": [
+      "12.27 / sqrt(V) Angstroms",
+      "1.227 / V Angstroms",
+      "0.286 / sqrt(V) Angstroms",
+      "150 * V Angstroms"
+    ],
+    "correctOption": 0,
+    "explanation": "lambda = h / p = h / sqrt(2*m*e*V) = 1.227 nm / sqrt(V) = 12.27 / sqrt(V) Angstroms.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_2",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "Schrödinger Equation & Particle in a Box",
+    "questionText": "For a particle in an infinitely deep 1D potential well of width L, the energy eigenvalues E_n are proportional to:",
+    "options": [
+      "n^2",
+      "n",
+      "1/n",
+      "sqrt(n)"
+    ],
+    "correctOption": 0,
+    "explanation": "E_n = (n^2 * h^2) / (8 * m * L^2), showing energy eigenvalues are directly proportional to n^2 (quantized).",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u2_3",
+    "subjectId": "physics",
+    "unitNumber": 2,
+    "topic": "Quantum Tunneling & Qubits",
+    "questionText": "In quantum computing, what property allows a qubit to represent both |0> and |1> simultaneously?",
+    "options": [
+      "Quantum Superposition",
+      "Pauli Exclusion",
+      "Tunneling Decay",
+      "Quantum Confinement"
+    ],
+    "correctOption": 0,
+    "explanation": "Quantum superposition allows a state |psi> = alpha|0> + beta|1> where |alpha|^2 + |beta|^2 = 1.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u3_1",
+    "subjectId": "physics",
+    "unitNumber": 3,
+    "topic": "Thin Film Interference & Anti-Reflection Coating",
+    "questionText": "What is the condition for destructive interference in a thin film of refractive index mu and thickness t in reflected light at normal incidence?",
+    "options": [
+      "2 * mu * t = n * lambda",
+      "2 * mu * t = (2n + 1) * lambda / 2",
+      "mu * t = n * lambda",
+      "2 * mu * t * cos(r) = 0"
+    ],
+    "correctOption": 0,
+    "explanation": "Due to phase reversal (pi shift or lambda/2 path change) on reflection from a denser medium, total path difference is 2*mu*t - lambda/2. For destructive interference: 2*mu*t - lambda/2 = (2n-1)*lambda/2 => 2*mu*t = n*lambda.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_phy_u3_2",
+    "subjectId": "physics",
+    "unitNumber": 3,
+    "topic": "Polarization & Malus' Law",
+    "questionText": "Unpolarized light passes through two polarizers whose transmission axes are angled at 60 degrees. If incident intensity is I_0, transmitted intensity is:",
+    "options": [
+      "I_0 / 8",
+      "I_0 / 4",
+      "3 * I_0 / 8",
+      "I_0 / 2"
+    ],
+    "correctOption": 0,
+    "explanation": "After the 1st polarizer, I1 = I_0 / 2. By Malus' Law for the 2nd polarizer: I2 = I1 * cos^2(60°) = (I_0 / 2) * (1/2)^2 = I_0 / 8.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_phy_u4_1",
+    "subjectId": "physics",
+    "unitNumber": 4,
+    "topic": "Hall Effect & Hall Coefficient",
+    "questionText": "For an n-type semiconductor with charge carrier concentration n and electronic charge e, the Hall coefficient R_H is given by:",
+    "options": [
+      "-1 / (n * e)",
+      "+1 / (n * e)",
+      "-n * e",
+      "mu / (n * e)"
+    ],
+    "correctOption": 0,
+    "explanation": "R_H = -1 / (n * e). The negative sign signifies electrons as the majority charge carriers in n-type semiconductor.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_phy_u4_2",
+    "subjectId": "physics",
+    "unitNumber": 4,
+    "topic": "Ultrasonics & Piezoelectric Generator",
+    "questionText": "Ultrasonic waves are produced in quartz crystals using which fundamental physical principle?",
+    "options": [
+      "Inverse Piezoelectric Effect",
+      "Magnetostriction Effect",
+      "Hall Effect",
+      "Doppler Effect"
+    ],
+    "correctOption": 0,
+    "explanation": "Applying a high-frequency alternating electric field across opposite faces of a quartz crystal causes alternating mechanical expansions and contractions (Inverse Piezoelectric effect), producing ultrasonic vibrations.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u5_1",
+    "subjectId": "physics",
+    "unitNumber": 5,
+    "topic": "Superconductivity & Meissner Effect",
+    "questionText": "When a material enters the superconducting state below its critical temperature T_c, the magnetic induction B inside the material becomes:",
+    "options": [
+      "Zero (Perfect Diamagnetism)",
+      "Maximum (Ferromagnetic)",
+      "Infinite",
+      "Equal to applied field"
+    ],
+    "correctOption": 0,
+    "explanation": "The Meissner effect states that a superconductor expels all magnetic flux lines below T_c, so B = 0 inside, showing chi = -1 (perfect diamagnetism).",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_phy_u5_2",
+    "subjectId": "physics",
+    "unitNumber": 5,
+    "topic": "Quantum Confinement in Nanomaterials",
+    "questionText": "As the physical dimension of a semiconductor nanoparticle decreases below its Bohr exciton radius, its band gap energy:",
+    "options": [
+      "Increases (Blue Shift)",
+      "Decreases (Red Shift)",
+      "Remains constant",
+      "Drops to zero"
+    ],
+    "correctOption": 0,
+    "explanation": "Due to quantum confinement, electron energy levels become discrete like atoms, widening the effective band gap E_g and causing an optical blue shift.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_bxe_u1_1",
+    "subjectId": "bxe",
+    "unitNumber": 1,
+    "topic": "Diodes & Full Wave Bridge Rectifier",
+    "questionText": "What is the Peak Inverse Voltage (PIV) rating required for each diode in a bridge rectifier with peak secondary AC voltage V_m?",
+    "options": [
+      "V_m",
+      "2 * V_m",
+      "V_m / 2",
+      "sqrt(2) * V_m"
+    ],
+    "correctOption": 0,
+    "explanation": "In a bridge rectifier, two diodes conduct in each half cycle in series across the load, subjecting non-conducting diodes to a maximum reverse voltage of V_m (unlike center-tapped which requires 2*V_m).",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u1_2",
+    "subjectId": "bxe",
+    "unitNumber": 1,
+    "topic": "Ripple Factor of Rectifiers",
+    "questionText": "The ripple factor of an unfiltered full-wave rectifier is:",
+    "options": [
+      "0.482",
+      "1.21",
+      "0.25",
+      "0.812"
+    ],
+    "correctOption": 0,
+    "explanation": "gamma = sqrt((V_rms/V_dc)^2 - 1) = sqrt(( (V_m/sqrt(2)) / (2*V_m/pi) )^2 - 1) = sqrt(pi^2 / 8 - 1) approx 0.482.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u2_1",
+    "subjectId": "bxe",
+    "unitNumber": 2,
+    "topic": "BJT in Common Emitter (CE) Configuration",
+    "questionText": "In a Common Emitter BJT amplifier, what is the phase relationship between the input AC signal and the output collector voltage?",
+    "options": [
+      "180 degrees out of phase",
+      "In phase (0 degrees)",
+      "90 degrees phase lead",
+      "90 degrees phase lag"
+    ],
+    "correctOption": 0,
+    "explanation": "When base voltage increases, base and collector currents increase, causing larger voltage drop across load resistor R_c and pulling collector voltage V_c down, producing a 180° phase inversion.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u2_2",
+    "subjectId": "bxe",
+    "unitNumber": 2,
+    "topic": "Enhancement MOSFET (EMOSFET) Operation",
+    "questionText": "An n-channel Enhancement MOSFET conducts drain current only when gate-to-source voltage V_GS is:",
+    "options": [
+      "Greater than threshold voltage V_th",
+      "Less than 0 V",
+      "Equal to 0 V",
+      "Negative and high"
+    ],
+    "correctOption": 0,
+    "explanation": "Enhancement MOSFET is normally OFF with no physical channel. A positive V_GS greater than positive threshold voltage V_th is required to attract electrons and create the inversion layer channel.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_bxe_u3_1",
+    "subjectId": "bxe",
+    "unitNumber": 3,
+    "topic": "Logic Gates & De Morgan's Laws",
+    "questionText": "According to De Morgan's first theorem, (A + B)' is equivalent to:",
+    "options": [
+      "A' * B'",
+      "A' + B'",
+      "(A * B)'",
+      "A XOR B"
+    ],
+    "correctOption": 0,
+    "explanation": "De Morgan's First Theorem states that the complement of a sum is equal to the product of the complements: (A + B)' = A' * B'.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u3_2",
+    "subjectId": "bxe",
+    "unitNumber": 3,
+    "topic": "Half Adder & Full Adder Logic",
+    "questionText": "A half adder circuit requires which logic gates to generate Sum and Carry?",
+    "options": [
+      "One XOR gate for Sum, one AND gate for Carry",
+      "One OR gate for Sum, one AND gate for Carry",
+      "Two NAND gates",
+      "One NOR gate"
+    ],
+    "correctOption": 0,
+    "explanation": "Sum = A XOR B, Carry = A AND B. A half adder requires one XOR gate for sum and one AND gate for carry.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u4_1",
+    "subjectId": "bxe",
+    "unitNumber": 4,
+    "topic": "Op-Amp Parameters & Inverting Amplifier",
+    "questionText": "In an inverting op-amp amplifier circuit with input resistor R1 = 10k and feedback resistor Rf = 100k, what is the closed-loop voltage gain?",
+    "options": [
+      "-10",
+      "+10",
+      "+11",
+      "-9"
+    ],
+    "correctOption": 0,
+    "explanation": "For an inverting op-amp with virtual ground at the inverting terminal, closed-loop gain A_v = -Rf / R1 = -100k / 10k = -10.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_bxe_u4_2",
+    "subjectId": "bxe",
+    "unitNumber": 4,
+    "topic": "Ideal Op-Amp Characteristics",
+    "questionText": "An ideal operational amplifier possesses which input and output impedances?",
+    "options": [
+      "Infinite input impedance, zero output impedance",
+      "Zero input impedance, infinite output impedance",
+      "50 ohms input, 50 ohms output",
+      "Unity input, unity output"
+    ],
+    "correctOption": 0,
+    "explanation": "An ideal op-amp draws no input current (R_in = infinity) and can drive any load without internal drop (R_out = 0).",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u5_1",
+    "subjectId": "bxe",
+    "unitNumber": 5,
+    "topic": "Sensors & LVDT Operation",
+    "questionText": "A Linear Variable Differential Transformer (LVDT) is an inductive transducer used to measure:",
+    "options": [
+      "Linear Displacement",
+      "Temperature",
+      "Light Intensity",
+      "Rotational Frequency"
+    ],
+    "correctOption": 0,
+    "explanation": "An LVDT converts mechanical linear displacement of its magnetic core into a differential AC voltage between its two secondary windings.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bxe_u5_2",
+    "subjectId": "bxe",
+    "unitNumber": 5,
+    "topic": "Cellular Concept & GSM Architecture",
+    "questionText": "In cellular mobile communications, frequency reuse is employed primarily to:",
+    "options": [
+      "Increase subscriber system capacity within limited spectrum",
+      "Increase transmit power",
+      "Prevent multipath fading",
+      "Eliminate handover"
+    ],
+    "correctOption": 0,
+    "explanation": "Frequency reuse allows the same radio frequency channels to be assigned to multiple non-interfering cells across a coverage region, dramatically multiplying user capacity.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u1_1",
+    "subjectId": "eg",
+    "unitNumber": 1,
+    "topic": "Projections of Points & First Angle System",
+    "questionText": "In First Angle Projection system, if a point P lies 30 mm above HP and 40 mm in front of VP, its top view p is located:",
+    "options": [
+      "40 mm below XY line",
+      "30 mm above XY line",
+      "40 mm above XY line",
+      "30 mm below XY line"
+    ],
+    "correctOption": 0,
+    "explanation": "In 1st angle projection, HP is rotated 90 degrees clockwise down. Top view distance from VP (40 mm) projects onto HP and appears 40 mm below the reference XY line.",
+    "normalTimeSeconds": 120,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u1_2",
+    "subjectId": "eg",
+    "unitNumber": 1,
+    "topic": "Projection of Straight Lines & True Length",
+    "questionText": "If a straight line AB is parallel to both the Horizontal Plane (HP) and Vertical Plane (VP), its projections in front view and top view are:",
+    "options": [
+      "Both parallel to the XY line and show True Length",
+      "Perpendicular to XY line",
+      "Points on XY line",
+      "Inclined at 45 degrees to XY"
+    ],
+    "correctOption": 0,
+    "explanation": "When a line is parallel to both reference planes, neither view foreshortens, so both front and top views are parallel lines to XY displaying the true length (TL).",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u2_1",
+    "subjectId": "eg",
+    "unitNumber": 2,
+    "topic": "Projection of Planes",
+    "questionText": "When a circular plane of diameter D is inclined to HP and perpendicular to VP, its top view is:",
+    "options": [
+      "An Ellipse with major axis = D",
+      "A Circle of diameter D",
+      "A Straight line inclined to XY",
+      "A Parabola"
+    ],
+    "correctOption": 0,
+    "explanation": "The diameter parallel to VP retains its true dimension D (major axis), while diameters perpendicular foreshorten by cos(theta), generating an ellipse in the top view.",
+    "normalTimeSeconds": 110,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u3_1",
+    "subjectId": "eg",
+    "unitNumber": 3,
+    "topic": "Engineering Curves - Conics",
+    "questionText": "If the eccentricity of a conic section e = 1, the curve generated is a:",
+    "options": [
+      "Parabola",
+      "Ellipse (e < 1)",
+      "Hyperbola (e > 1)",
+      "Circle (e = 0)"
+    ],
+    "correctOption": 0,
+    "explanation": "By definition of conic sections: e = 0 for circle, e < 1 for ellipse, e = 1 for parabola, and e > 1 for hyperbola.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u3_2",
+    "subjectId": "eg",
+    "unitNumber": 3,
+    "topic": "Development of Lateral Surfaces",
+    "questionText": "The development of the lateral surface of a right circular cone of base radius r and slant height L is a sector of a circle with subtended angle theta equal to:",
+    "options": [
+      "(r / L) * 360 degrees",
+      "(L / r) * 360 degrees",
+      "(r / L) * 180 degrees",
+      "2 * pi * r * L"
+    ],
+    "correctOption": 0,
+    "explanation": "Arc length of sector equals circumference of base: L * theta (in radians) = 2*pi*r => theta = (r / L) * 360°.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_eg_u4_1",
+    "subjectId": "eg",
+    "unitNumber": 4,
+    "topic": "Orthographic Projections",
+    "questionText": "In First Angle orthographic projection, where is the Left Hand Side View placed relative to the Front View?",
+    "options": [
+      "To the Right of the Front View",
+      "To the Left of the Front View",
+      "Above the Front View",
+      "Below the Front View"
+    ],
+    "correctOption": 0,
+    "explanation": "In 1st angle projection, the observer looks from the left, projects onto the plane situated on the opposite side, placing the Left Hand Side View to the right of the Front View.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_eg_u5_1",
+    "subjectId": "eg",
+    "unitNumber": 5,
+    "topic": "Isometric Projection & Isometric Scale",
+    "questionText": "The ratio of Isometric Length to True Length (Isometric Scale factor) is approximately:",
+    "options": [
+      "sqrt(2/3) approx 0.816",
+      "sqrt(3/2) approx 1.225",
+      "0.707",
+      "0.866"
+    ],
+    "correctOption": 0,
+    "explanation": "Isometric length / True length = cos(45°) / cos(30°) = (1/sqrt(2)) / (sqrt(3)/2) = sqrt(2/3) approx 0.8164 (or 81.6%).",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u1_1",
+    "subjectId": "fpl",
+    "unitNumber": 1,
+    "topic": "Algorithms & Flowchart Symbols",
+    "questionText": "In a standard flowchart, what geometric shape is used to represent a conditional decision?",
+    "options": [
+      "Rhombus / Diamond",
+      "Rectangle (Process)",
+      "Oval / Ellipse (Start/Stop)",
+      "Parallelogram (I/O)"
+    ],
+    "correctOption": 0,
+    "explanation": "A diamond/rhombus symbol represents conditional branching with two or more exit paths (True/False).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u2_1",
+    "subjectId": "fpl",
+    "unitNumber": 2,
+    "topic": "Operators, Precedence & Associativity in C",
+    "questionText": "In C language, what is the output of the expression: int x = 5 + 3 * 2 % 4; ?",
+    "options": [
+      "7",
+      "6",
+      "8",
+      "0"
+    ],
+    "correctOption": 0,
+    "explanation": "* and % have higher precedence than +, evaluated left-to-right: 3 * 2 = 6, 6 % 4 = 2, then 5 + 2 = 7.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u3_1",
+    "subjectId": "fpl",
+    "unitNumber": 3,
+    "topic": "Control Flow & Switch Statements",
+    "questionText": "In a C switch-case statement, what happens if the 'break' statement is omitted from a matched case?",
+    "options": [
+      "Execution falls through to subsequent cases until a break or end is reached",
+      "Compiler throws a syntax error",
+      "Switch statement restarts from case 1",
+      "Program terminates abruptly"
+    ],
+    "correctOption": 0,
+    "explanation": "In C, omission of 'break' results in 'fall-through', executing all subsequent case blocks regardless of condition until a break is encountered.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u4_1",
+    "subjectId": "fpl",
+    "unitNumber": 4,
+    "topic": "Arrays & Strings in C",
+    "questionText": "What character is automatically appended by the C compiler to terminate a string literal in memory?",
+    "options": [
+      "Null character '\\0'",
+      "Newline '\\n'",
+      "EOF character",
+      "Space ' '"
+    ],
+    "correctOption": 0,
+    "explanation": "C strings are null-terminated arrays of characters ending with byte '\\0' (ASCII 0).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_fpl_u5_1",
+    "subjectId": "fpl",
+    "unitNumber": 5,
+    "topic": "User Defined Functions & Recursion",
+    "questionText": "What is the primary condition that must be present in every recursive function to avoid an infinite recursion stack overflow?",
+    "options": [
+      "A base condition / terminating case",
+      "A while loop",
+      "Static variables",
+      "At least two return parameters"
+    ],
+    "correctOption": 0,
+    "explanation": "A recursive function must have a base terminating case that stops further recursive calls and unwinds the call stack.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u1_1",
+    "subjectId": "m2",
+    "unitNumber": 1,
+    "topic": "Beta & Gamma Functions",
+    "questionText": "What is the relation between Beta function B(m, n) and Gamma functions?",
+    "options": [
+      "B(m, n) = (Gamma(m) * Gamma(n)) / Gamma(m + n)",
+      "B(m, n) = Gamma(m + n) / (Gamma(m) * Gamma(n))",
+      "B(m, n) = Gamma(m) * Gamma(n)",
+      "B(m, n) = Gamma(m - n)"
+    ],
+    "correctOption": 0,
+    "explanation": "The fundamental relation is B(m, n) = (Gamma(m) * Gamma(n)) / Gamma(m + n) for m > 0, n > 0.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u1_2",
+    "subjectId": "m2",
+    "unitNumber": 1,
+    "topic": "Gamma Function Value of 1/2",
+    "questionText": "What is the exact value of Gamma(1/2)?",
+    "options": [
+      "sqrt(pi)",
+      "pi",
+      "pi / 2",
+      "1 / sqrt(pi)"
+    ],
+    "correctOption": 0,
+    "explanation": "Gamma(1/2) = integral_0^infinity e^(-x) * x^(-1/2) dx. Substituting x = u^2 yields 2 * integral_0^infinity e^(-u^2) du = sqrt(pi).",
+    "normalTimeSeconds": 70,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u2_1",
+    "subjectId": "m2",
+    "unitNumber": 2,
+    "topic": "Curve Tracing & Solid Geometry (Sphere)",
+    "questionText": "The equation of the tangent plane to the sphere x^2 + y^2 + z^2 = a^2 at point (x1, y1, z1) is:",
+    "options": [
+      "x*x1 + y*y1 + z*z1 = a^2",
+      "x*x1 + y*y1 + z*z1 = a",
+      "x1*(x - x1) + y1*(y - y1) = 0",
+      "x/x1 + y/y1 + z/z1 = 1"
+    ],
+    "correctOption": 0,
+    "explanation": "Gradient of F = 2xi + 2yj + 2zk. Normal vector at (x1, y1, z1) gives x1(x - x1) + y1(y - y1) + z1(z - z1) = 0 => x*x1 + y*y1 + z*z1 = x1^2 + y1^2 + z1^2 = a^2.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m2_u3_1",
+    "subjectId": "m2",
+    "unitNumber": 3,
+    "topic": "Multiple Integrals & Change of Order",
+    "questionText": "In evaluating double integral int_0^1 int_x^1 f(x, y) dy dx, reversing the order of integration yields:",
+    "options": [
+      "int_0^1 int_0^y f(x, y) dx dy",
+      "int_0^1 int_y^1 f(x, y) dx dy",
+      "int_x^1 int_0^1 f(x, y) dx dy",
+      "int_0^1 int_0^1 f(x, y) dx dy"
+    ],
+    "correctOption": 0,
+    "explanation": "The region is bounded by y = x to y = 1 and x = 0 to x = 1 (a triangle). Changing to horizontal strips: x varies from 0 to y, and y varies from 0 to 1.",
+    "normalTimeSeconds": 130,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m2_u4_1",
+    "subjectId": "m2",
+    "unitNumber": 4,
+    "topic": "First Order Exact Differential Equations",
+    "questionText": "The differential equation M(x, y)dx + N(x, y)dy = 0 is exact if and only if:",
+    "options": [
+      "dM/dy = dN/dx",
+      "dM/dx = dN/dy",
+      "dM/dy + dN/dx = 0",
+      "M/N = constant"
+    ],
+    "correctOption": 0,
+    "explanation": "By Euler's reciprocity condition for an exact differential dF = M dx + N dy, equality of mixed second partials requires dM/dy = dN/dx.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u5_1",
+    "subjectId": "m2",
+    "unitNumber": 5,
+    "topic": "Applications to Newton's Law of Cooling",
+    "questionText": "Newton's Law of Cooling states that the rate of change of temperature dT/dt of a body is proportional to:",
+    "options": [
+      "(T - T_s) where T_s is surrounding temperature",
+      "T^2",
+      "sqrt(T - T_s)",
+      "T * T_s"
+    ],
+    "correctOption": 0,
+    "explanation": "dT/dt = -k(T - T_s), meaning the rate of cooling is directly proportional to temperature excess over surrounding medium.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_chm_u1_1",
+    "subjectId": "chemistry",
+    "unitNumber": 1,
+    "topic": "Water Technology & EDTA Method",
+    "questionText": "In EDTA titration for water hardness estimation, what indicator is used and at what buffered pH is the titration performed?",
+    "options": [
+      "Eriochrome Black T (EBT) at pH 10",
+      "Phenolphthalein at pH 7",
+      "Methyl orange at pH 4",
+      "Starch at pH 12"
+    ],
+    "correctOption": 0,
+    "explanation": "EBT forms a wine-red complex with Ca2+/Mg2+ ions at pH 10 (buffered with NH4OH/NH4Cl), turning blue at the stoichiometric endpoint when EDTA binds all metal ions.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_chm_u1_2",
+    "subjectId": "chemistry",
+    "unitNumber": 1,
+    "topic": "Zeolite Process of Water Softening",
+    "questionText": "Exhausted sodium zeolite bed (Na2Z) is regenerated by washing with a 10% solution of:",
+    "options": [
+      "Sodium Chloride (NaCl) brine",
+      "Hydrochloric Acid (HCl)",
+      "Sodium Hydroxide (NaOH)",
+      "Sulfuric Acid (H2SO4)"
+    ],
+    "correctOption": 0,
+    "explanation": "CaZ + 2NaCl -> Na2Z + CaCl2. Brine (NaCl) displaces Ca2+ and Mg2+ from the exhausted zeolite, regenerating Na2Z.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_chm_u2_1",
+    "subjectId": "chemistry",
+    "unitNumber": 2,
+    "topic": "UV-Visible Spectroscopy & Beer-Lambert Law",
+    "questionText": "Beer-Lambert Law states that absorbance A is related to path length l and molar concentration c by:",
+    "options": [
+      "A = epsilon * c * l",
+      "A = c / (epsilon * l)",
+      "A = log10(c * l)",
+      "A = epsilon * (c + l)"
+    ],
+    "correctOption": 0,
+    "explanation": "A = -log10(I / I_0) = epsilon * c * l, where epsilon is molar absorptivity (extinction coefficient).",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_chm_u3_1",
+    "subjectId": "chemistry",
+    "unitNumber": 3,
+    "topic": "Polymers & Conducting Polymers",
+    "questionText": "Polyacetylene exhibits electrical conductivity upon doping because of:",
+    "options": [
+      "Conjugated alternating single and double carbon-carbon bonds",
+      "Ionic crosslinks",
+      "Presence of chlorine atoms",
+      "High molecular weight"
+    ],
+    "correctOption": 0,
+    "explanation": "Conjugated pi-electron clouds along the polymer backbone allow delocalized mobile charge carriers upon p-doping or n-doping, leading to high electrical conductivity.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  },
+  {
+    "id": "q_chm_u4_1",
+    "subjectId": "chemistry",
+    "unitNumber": 4,
+    "topic": "Energy Sources & Bomb Calorimeter",
+    "questionText": "In Bomb Calorimeter, what is measured directly to determine the Higher Calorific Value (HCV) of solid fuels?",
+    "options": [
+      "Heat liberated at constant volume",
+      "Heat liberated at constant pressure",
+      "Latent heat of condensation only",
+      "Proximate moisture content"
+    ],
+    "correctOption": 0,
+    "explanation": "The bomb is a closed rigid container, so combustion occurs at constant volume. HCV = (W + w)(t2 - t1) / m.",
+    "normalTimeSeconds": 110,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_chm_u5_1",
+    "subjectId": "chemistry",
+    "unitNumber": 5,
+    "topic": "Corrosion & Cathodic Protection",
+    "questionText": "In sacrificial anode cathodic protection of an underground iron pipe, which metal is commonly connected as the sacrificial anode?",
+    "options": [
+      "Zinc or Magnesium (more active than Fe)",
+      "Copper (less active)",
+      "Silver",
+      "Lead"
+    ],
+    "correctOption": 0,
+    "explanation": "Metals with more negative reduction potentials (like Zn or Mg) act as anodes, corroding preferentially and protecting the iron cathode.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u1_1",
+    "subjectId": "bee",
+    "unitNumber": 1,
+    "topic": "DC Circuits & Superposition Theorem",
+    "questionText": "When applying Superposition Theorem to analyze a linear circuit, ideal voltage sources not under consideration are replaced by:",
+    "options": [
+      "Short circuit (zero internal resistance)",
+      "Open circuit (infinite resistance)",
+      "Resistor equal to load",
+      "Current source"
+    ],
+    "correctOption": 0,
+    "explanation": "An ideal independent voltage source has zero internal impedance, so deactivating it is equivalent to replacing it with a short circuit.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u1_2",
+    "subjectId": "bee",
+    "unitNumber": 1,
+    "topic": "Star-Delta Transformation",
+    "questionText": "Three equal resistors of resistance R are connected in Star. What is the equivalent resistance in each arm of the Delta network?",
+    "options": [
+      "3 * R",
+      "R / 3",
+      "R",
+      "sqrt(3) * R"
+    ],
+    "correctOption": 0,
+    "explanation": "R_delta = R_a + R_b + (R_a*R_b)/R_c. For equal resistors R, R_delta = R + R + (R*R)/R = 3R.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u2_1",
+    "subjectId": "bee",
+    "unitNumber": 2,
+    "topic": "Electromagnetism & Faraday's Laws",
+    "questionText": "The magnitude of dynamically induced EMF in a conductor of length L moving with velocity v perpendicular to magnetic field B is:",
+    "options": [
+      "B * L * v",
+      "B * L / v",
+      "B^2 * L * v",
+      "0.5 * B * L * v^2"
+    ],
+    "correctOption": 0,
+    "explanation": "e = B * L * v * sin(theta). For perpendicular motion (theta = 90°), e = B * L * v.",
+    "normalTimeSeconds": 70,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u3_1",
+    "subjectId": "bee",
+    "unitNumber": 3,
+    "topic": "AC Fundamentals & Form Factor",
+    "questionText": "What is the Form Factor of a pure sinusoidal alternating voltage wave?",
+    "options": [
+      "1.11 (RMS / Average)",
+      "1.414 (Peak / RMS)",
+      "1.00",
+      "0.707"
+    ],
+    "correctOption": 0,
+    "explanation": "Form Factor = V_rms / V_avg = (V_m / sqrt(2)) / (2*V_m / pi) = pi / (2 * sqrt(2)) approx 1.11.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u4_1",
+    "subjectId": "bee",
+    "unitNumber": 4,
+    "topic": "Series RLC Resonance",
+    "questionText": "In a series RLC circuit at resonant frequency f_0, what is the net circuit impedance Z?",
+    "options": [
+      "Z = R (Purely resistive, minimum impedance)",
+      "Z = 0",
+      "Z = infinity",
+      "Z = sqrt(R^2 + (omega*L)^2)"
+    ],
+    "correctOption": 0,
+    "explanation": "At resonance, inductive reactance X_L equals capacitive reactance X_C, canceling each other out. Hence Z = R with power factor cos(phi) = 1.0.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_bee_u4_2",
+    "subjectId": "bee",
+    "unitNumber": 4,
+    "topic": "3-Phase Star Connection Relations",
+    "questionText": "In a balanced 3-phase star-connected AC load, the relationship between line voltage V_L and phase voltage V_ph is:",
+    "options": [
+      "V_L = sqrt(3) * V_ph",
+      "V_L = V_ph",
+      "V_L = V_ph / sqrt(3)",
+      "V_L = 3 * V_ph"
+    ],
+    "correctOption": 0,
+    "explanation": "In star connection, line voltage is the phasor difference between two phase voltages: V_L = sqrt(3) * V_ph, while line current I_L = I_ph.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_bee_u5_1",
+    "subjectId": "bee",
+    "unitNumber": 5,
+    "topic": "Single Phase Transformer EMF Equation",
+    "questionText": "The RMS value of induced EMF E1 in primary winding with N1 turns at frequency f and maximum core flux phi_m is:",
+    "options": [
+      "4.44 * f * N1 * phi_m",
+      "4.00 * f * N1 * phi_m",
+      "2.22 * f * N1 * phi_m",
+      "2 * pi * f * N1 * phi_m"
+    ],
+    "correctOption": 0,
+    "explanation": "Average EMF = 4 * f * phi_m * N1. Multiplying by form factor (1.11) gives RMS EMF = 4.44 * f * phi_m * N1.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_mec_u1_1",
+    "subjectId": "mechanics",
+    "unitNumber": 1,
+    "topic": "Varignon's Theorem of Moments",
+    "questionText": "Varignon's theorem states that the moment of a resultant force about any point in the plane is equal to:",
+    "options": [
+      "The algebraic sum of the moments of its component forces about that same point",
+      "Zero for concurrent force systems",
+      "The product of force and perpendicular distance squared",
+      "The vector cross product of resultant and couple"
+    ],
+    "correctOption": 0,
+    "explanation": "Varignon's theorem of moments states: M_R = sum(M_F), the moment of the resultant force about any point equals the algebraic sum of the moments of individual component forces about that point.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u1_2",
+    "subjectId": "mechanics",
+    "unitNumber": 1,
+    "topic": "Moment of Inertia & Parallel Axis Theorem",
+    "questionText": "For a rectangular lamina of base b and height h, what is its moment of inertia I_x about its centroidal horizontal axis?",
+    "options": [
+      "(b * h^3) / 12",
+      "(b * h^3) / 3",
+      "(b^3 * h) / 12",
+      "(b * h^2) / 6"
+    ],
+    "correctOption": 0,
+    "explanation": "I_xx(centroidal) = integral y^2 dA = b * integral_{-h/2}^{h/2} y^2 dy = (b * h^3) / 12.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u2_1",
+    "subjectId": "mechanics",
+    "unitNumber": 2,
+    "topic": "Equilibrium & Lami's Theorem",
+    "questionText": "Lami's Theorem is applicable for static equilibrium when a body is acted upon by:",
+    "options": [
+      "Three coplanar, concurrent, and non-collinear forces",
+      "Two parallel forces",
+      "Any system of four general forces",
+      "Frictionless couples only"
+    ],
+    "correctOption": 0,
+    "explanation": "Lami's theorem states: P/sin(alpha) = Q/sin(beta) = R/sin(gamma), valid specifically for three coplanar concurrent forces in equilibrium.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u3_1",
+    "subjectId": "mechanics",
+    "unitNumber": 3,
+    "topic": "Coulomb Friction & Angle of Repose",
+    "questionText": "The angle of repose theta for a block on an inclined plane with coefficient of static friction mu is given by:",
+    "options": [
+      "tan(theta) = mu",
+      "sin(theta) = mu",
+      "cos(theta) = mu",
+      "theta = mu * 90 degrees"
+    ],
+    "correctOption": 0,
+    "explanation": "At impending motion down the plane: m*g*sin(theta) = F_max = mu * m*g*cos(theta) => tan(theta) = mu.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u4_1",
+    "subjectId": "mechanics",
+    "unitNumber": 4,
+    "topic": "Kinematics & Projectile Motion",
+    "questionText": "A particle is projected with initial velocity u at angle alpha to the horizontal. What is its maximum horizontal range R_max?",
+    "options": [
+      "u^2 / g (at alpha = 45 degrees)",
+      "u^2 / (2 * g)",
+      "2 * u^2 / g",
+      "u^2 * sin(alpha) / g"
+    ],
+    "correctOption": 0,
+    "explanation": "R = (u^2 * sin(2*alpha)) / g. Maximum range occurs when sin(2*alpha) = 1 (alpha = 45°), yielding R_max = u^2 / g.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_mec_u5_1",
+    "subjectId": "mechanics",
+    "unitNumber": 5,
+    "topic": "Kinetics & Work-Energy Principle",
+    "questionText": "The Work-Energy principle for a particle of mass m states that net work done by all forces equals:",
+    "options": [
+      "Change in Kinetic Energy (KE_final - KE_initial)",
+      "Rate of change of momentum",
+      "Total potential energy",
+      "Impulse of the force"
+    ],
+    "correctOption": 0,
+    "explanation": "W_net = integral F dx = integral m*(v dv/dx)*dx = integral m*v dv = 1/2*m*v2^2 - 1/2*m*v1^2 = Delta KE.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u1_1",
+    "subjectId": "pps",
+    "unitNumber": 1,
+    "topic": "Python Basics & Features",
+    "questionText": "In Python, which built-in function returns the memory address (identity) of an object?",
+    "options": [
+      "id()",
+      "type()",
+      "hash()",
+      "addr()"
+    ],
+    "correctOption": 0,
+    "explanation": "id(object) returns an integer representing its unique identity (the memory address in CPython implementation).",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u2_1",
+    "subjectId": "pps",
+    "unitNumber": 2,
+    "topic": "Advanced Data Types & Slicing",
+    "questionText": "What is the output of the Python snippet: lst = [10, 20, 30, 40, 50]; print(lst[::-2])?",
+    "options": [
+      "[50, 30, 10]",
+      "[50, 40, 30]",
+      "[10, 30, 50]",
+      "[40, 20]"
+    ],
+    "correctOption": 0,
+    "explanation": "The slice [::-2] starts from the end of the list and steps backward by 2: indices 4 (50), 2 (30), 0 (10) -> [50, 30, 10].",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u3_1",
+    "subjectId": "pps",
+    "unitNumber": 3,
+    "topic": "Python Functions & Lambda Expressions",
+    "questionText": "What is the result of executing: (lambda x, y: x * y + 2)(3, 4)?",
+    "options": [
+      "14",
+      "24",
+      "10",
+      "9"
+    ],
+    "correctOption": 0,
+    "explanation": "The lambda expression evaluates 3 * 4 + 2 = 12 + 2 = 14.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u4_1",
+    "subjectId": "pps",
+    "unitNumber": 4,
+    "topic": "File Handling Modes in Python",
+    "questionText": "Which file open mode in Python opens a file for both reading and writing without truncating it?",
+    "options": [
+      "'r+'",
+      "'w+' (truncates file)",
+      "'a'",
+      "'x'"
+    ],
+    "correctOption": 0,
+    "explanation": "'r+' opens for reading and writing with file pointer at the beginning without truncating the existing content.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_pps_u5_1",
+    "subjectId": "pps",
+    "unitNumber": 5,
+    "topic": "Object Oriented Programming in Python",
+    "questionText": "In Python OOP, what special method is invoked automatically when a new instance of a class is created?",
+    "options": [
+      "__init__()",
+      "__new__()",
+      "__main__()",
+      "__create__()"
+    ],
+    "correctOption": 0,
+    "explanation": "__init__() is the constructor initializer method in Python classes, called right after the instance is created.",
+    "normalTimeSeconds": 60,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  }
+]

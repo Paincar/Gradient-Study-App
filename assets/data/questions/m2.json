@@ -1,0 +1,122 @@
+[
+  {
+    "id": "q_m2_u1_1",
+    "subjectId": "m2",
+    "unitNumber": 1,
+    "topic": "Beta & Gamma Functions",
+    "questionText": "What is the relation between Beta function B(m, n) and Gamma functions?",
+    "options": [
+      "B(m, n) = (Gamma(m) * Gamma(n)) / Gamma(m + n)",
+      "B(m, n) = Gamma(m + n) / (Gamma(m) * Gamma(n))",
+      "B(m, n) = Gamma(m) * Gamma(n)",
+      "B(m, n) = Gamma(m - n)"
+    ],
+    "correctOption": 0,
+    "explanation": "The fundamental relation is B(m, n) = (Gamma(m) * Gamma(n)) / Gamma(m + n) for m > 0, n > 0.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u1_2",
+    "subjectId": "m2",
+    "unitNumber": 1,
+    "topic": "Gamma Function Value of 1/2",
+    "questionText": "What is the exact value of Gamma(1/2)?",
+    "options": [
+      "sqrt(pi)",
+      "pi",
+      "pi / 2",
+      "1 / sqrt(pi)"
+    ],
+    "correctOption": 0,
+    "explanation": "Gamma(1/2) = integral_0^infinity e^(-x) * x^(-1/2) dx. Substituting x = u^2 yields 2 * integral_0^infinity e^(-u^2) du = sqrt(pi).",
+    "normalTimeSeconds": 70,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU In-Sem 2023",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u2_1",
+    "subjectId": "m2",
+    "unitNumber": 2,
+    "topic": "Curve Tracing & Solid Geometry (Sphere)",
+    "questionText": "The equation of the tangent plane to the sphere x^2 + y^2 + z^2 = a^2 at point (x1, y1, z1) is:",
+    "options": [
+      "x*x1 + y*y1 + z*z1 = a^2",
+      "x*x1 + y*y1 + z*z1 = a",
+      "x1*(x - x1) + y1*(y - y1) = 0",
+      "x/x1 + y/y1 + z/z1 = 1"
+    ],
+    "correctOption": 0,
+    "explanation": "Gradient of F = 2xi + 2yj + 2zk. Normal vector at (x1, y1, z1) gives x1(x - x1) + y1(y - y1) + z1(z - z1) = 0 => x*x1 + y*y1 + z*z1 = x1^2 + y1^2 + z1^2 = a^2.",
+    "normalTimeSeconds": 100,
+    "difficulty": "Medium",
+    "year": 2024,
+    "exam": "SPPU In-Sem 2024",
+    "marks": 3
+  },
+  {
+    "id": "q_m2_u3_1",
+    "subjectId": "m2",
+    "unitNumber": 3,
+    "topic": "Multiple Integrals & Change of Order",
+    "questionText": "In evaluating double integral int_0^1 int_x^1 f(x, y) dy dx, reversing the order of integration yields:",
+    "options": [
+      "int_0^1 int_0^y f(x, y) dx dy",
+      "int_0^1 int_y^1 f(x, y) dx dy",
+      "int_x^1 int_0^1 f(x, y) dx dy",
+      "int_0^1 int_0^1 f(x, y) dx dy"
+    ],
+    "correctOption": 0,
+    "explanation": "The region is bounded by y = x to y = 1 and x = 0 to x = 1 (a triangle). Changing to horizontal strips: x varies from 0 to y, and y varies from 0 to 1.",
+    "normalTimeSeconds": 130,
+    "difficulty": "Medium",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 4
+  },
+  {
+    "id": "q_m2_u4_1",
+    "subjectId": "m2",
+    "unitNumber": 4,
+    "topic": "First Order Exact Differential Equations",
+    "questionText": "The differential equation M(x, y)dx + N(x, y)dy = 0 is exact if and only if:",
+    "options": [
+      "dM/dy = dN/dx",
+      "dM/dx = dN/dy",
+      "dM/dy + dN/dx = 0",
+      "M/N = constant"
+    ],
+    "correctOption": 0,
+    "explanation": "By Euler's reciprocity condition for an exact differential dF = M dx + N dy, equality of mixed second partials requires dM/dy = dN/dx.",
+    "normalTimeSeconds": 80,
+    "difficulty": "Easy",
+    "year": 2024,
+    "exam": "SPPU End-Sem 2024",
+    "marks": 2
+  },
+  {
+    "id": "q_m2_u5_1",
+    "subjectId": "m2",
+    "unitNumber": 5,
+    "topic": "Applications to Newton's Law of Cooling",
+    "questionText": "Newton's Law of Cooling states that the rate of change of temperature dT/dt of a body is proportional to:",
+    "options": [
+      "(T - T_s) where T_s is surrounding temperature",
+      "T^2",
+      "sqrt(T - T_s)",
+      "T * T_s"
+    ],
+    "correctOption": 0,
+    "explanation": "dT/dt = -k(T - T_s), meaning the rate of cooling is directly proportional to temperature excess over surrounding medium.",
+    "normalTimeSeconds": 90,
+    "difficulty": "Easy",
+    "year": 2023,
+    "exam": "SPPU End-Sem 2023",
+    "marks": 3
+  }
+]
