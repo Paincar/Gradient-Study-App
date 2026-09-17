@@ -1,4 +1,4 @@
-﻿# Gradient (v1.0) 🎓✨
+# Gradient (v1.0) 🎓✨
 > **Personalized AI Learning & Focus Assistant for SPPU Engineering (2024 Revised Pattern)**
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 <p align="center">
-  <img src="Gradeint-App-Logo.jpg" alt="Gradient Logo" width="180" style="border-radius: 24px;" />
+  <img src="assets/images/gradient_logo.png" alt="Gradient Logo" width="180" style="border-radius: 24px;" />
 </p>
 
 ---
