@@ -10,6 +10,8 @@ class AuthService {
   AuthService._internal();
 
   static const String appDebugSha1 = 'F6:84:D5:F0:83:70:18:6A:4F:12:82:AF:DF:95:70:D5:1B:59:38:A7';
+  static const String appDebugSha256 = 'F7:D6:60:7F:0D:E5:32:79:60:8C:E9:56:22:C7:9E:E1:C7:E0:8A:ED:E7:B7:E7:09:A8:F7:35:4A:05:A5:18:9F';
+  static const String appPackageName = 'com.focuspath.app';
 
   bool _isFirebaseReady = false;
   final GoogleSignIn _googleSignIn = GoogleSignIn(

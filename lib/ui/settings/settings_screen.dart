@@ -221,6 +221,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                                         await ref.read(notesNotifierProvider.notifier).saveNotes(merged);
                                       } catch (e) {
                                         if (context.mounted) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              duration: const Duration(seconds: 8),
+                                              backgroundColor: RosePineColors.dawnLove,
+                                              content: const Text('Google Sign-In requires Firebase SHA-1 setup.'),
+                                              action: SnackBarAction(
+                                                label: 'COPY SHA-1',
+                                                textColor: Colors.white,
+                                                onPressed: () {
+                                                  Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                    const SnackBar(content: Text('📋 SHA-1 copied to clipboard!')),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          );
                                           _showGoogleSignInHelpDialog(context, ref);
                                         }
                                       }
@@ -230,6 +247,30 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               ],
                             ),
                             const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                  icon: const Icon(Icons.copy_rounded, size: 14),
+                                  label: const Text('Copy SHA-1 Key', style: TextStyle(fontSize: 12)),
+                                  onPressed: () {
+                                    Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        backgroundColor: RosePineColors.dawnPine,
+                                        content: Text('📋 Debug SHA-1 copied: ${AuthService.appDebugSha1}'),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                TextButton.icon(
+                                  icon: const Icon(Icons.help_outline_rounded, size: 14),
+                                  label: const Text('Setup Guide', style: TextStyle(fontSize: 12)),
+                                  onPressed: () => _showGoogleSignInHelpDialog(context, ref),
+                                ),
+                              ],
+                            ),
                             Center(
                               child: TextButton.icon(
                                 icon: const Icon(Icons.person_outline_rounded, size: 16),
@@ -1321,50 +1362,122 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
-            Icon(Icons.info_outline_rounded, color: Colors.orange),
+            Icon(Icons.cloud_sync_rounded, color: RosePineColors.dawnIris),
             SizedBox(width: 8),
-            Text('Google Sign-In Notice'),
+            Text('Firebase & Google Setup'),
           ],
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Google Play Services returned Code 10 (DEVELOPER_ERROR).\n\nThis occurs because Google Sign-In requires your Firebase project to have package "com.focuspath.app" registered with this device\'s SHA-1 signing key.',
-              style: TextStyle(fontSize: 13, height: 1.4),
-            ),
-            const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(10),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'To link Google Sign-In with Firebase Cloud Sync:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
               ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Debug SHA-1 Key:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 4),
-                  SelectableText(
-                    AuthService.appDebugSha1,
-                    style: TextStyle(fontSize: 11, fontFamily: 'monospace'),
-                  ),
-                ],
+              const SizedBox(height: 6),
+              const Text(
+                '1. Go to Firebase Console → Project Settings → Android App ("com.focuspath.app").\n'
+                '2. Add the SHA-1 & SHA-256 fingerprints below.\n'
+                '3. Enable Google in Firebase Auth → Sign-in method.\n'
+                '4. Download google-services.json into android/app/.',
+                style: TextStyle(fontSize: 12, height: 1.4),
               ),
-            ),
-            const SizedBox(height: 8),
-            OutlinedButton.icon(
-              icon: const Icon(Icons.copy_rounded, size: 14),
-              label: const Text('Copy SHA-1 Fingerprint', style: TextStyle(fontSize: 12)),
-              onPressed: () {
-                Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('✅ SHA-1 copied to clipboard!')),
-                );
-              },
-            ),
-          ],
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('Package Name / Application ID:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: SelectableText(
+                            AuthService.appPackageName,
+                            style: TextStyle(fontSize: 11, fontFamily: 'monospace'),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.copy_rounded, size: 14),
+                          tooltip: 'Copy Package Name',
+                          onPressed: () {
+                            Clipboard.setData(const ClipboardData(text: AuthService.appPackageName));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('📋 Package name copied!')),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    const Divider(height: 14),
+                    const Text('Debug SHA-1 Key:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: SelectableText(
+                            AuthService.appDebugSha1,
+                            style: TextStyle(fontSize: 10.5, fontFamily: 'monospace'),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.copy_rounded, size: 14),
+                          tooltip: 'Copy SHA-1',
+                          onPressed: () {
+                            Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('✅ SHA-1 copied to clipboard!')),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    const Divider(height: 14),
+                    const Text('Debug SHA-256 Key:', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: SelectableText(
+                            AuthService.appDebugSha256,
+                            style: TextStyle(fontSize: 10, fontFamily: 'monospace'),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.copy_rounded, size: 14),
+                          tooltip: 'Copy SHA-256',
+                          onPressed: () {
+                            Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha256));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('✅ SHA-256 copied to clipboard!')),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.copy_all_rounded, size: 16),
+                  label: const Text('Copy SHA-1 Fingerprint'),
+                  onPressed: () {
+                    Clipboard.setData(const ClipboardData(text: AuthService.appDebugSha1));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('✅ SHA-1 copied to clipboard!')),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Close')),

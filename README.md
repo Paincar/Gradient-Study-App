@@ -3,8 +3,15 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
 [![Version](https://img.shields.io/badge/version-1.0.0-success.svg)](https://github.com/Paincar/Gradient-Study-App/releases)
+[![Download APK](https://img.shields.io/badge/Download-Gradient_v1.0.apk-2ea44f?logo=android&style=flat-square)](https://github.com/Paincar/Gradient-Study-App/raw/main/release/Gradient-v1.0.apk)
 [![Syllabus](https://img.shields.io/badge/SPPU%20Syllabus-2024%20Revised-orange.svg)](https://unipune.ac.in)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+<p align="center">
+  <a href="https://github.com/Paincar/Gradient-Study-App/raw/main/release/Gradient-v1.0.apk">
+    <img src="https://img.shields.io/badge/⚡_Direct_Download-Gradient_v1.0.apk-blueviolet?style=for-the-badge&logo=android" alt="Download APK" />
+  </a>
+</p>
 
 <p align="center">
   <img src="assets/images/gradient_logo.png" alt="Gradient Logo" width="180" style="border-radius: 24px;" />
@@ -77,6 +84,19 @@ flutter pub get
 # Run on your connected device
 flutter run
 ```
+
+---
+
+## 🔑 Firebase & Cloud Sync Configuration (Optional)
+To enable Google Sign-In and Cloud Note Sync:
+1. Open the [Firebase Console](https://console.firebase.google.com/) and create a project.
+2. Add an **Android** application with package: `com.focuspath.app`.
+3. Add the **Debug SHA-1 Key**:
+   `F6:84:D5:F0:83:70:18:6A:4F:12:82:AF:DF:95:70:D5:1B:59:38:A7`
+4. Under **Authentication** -> **Sign-in method**, enable **Google**.
+5. Download `google-services.json` and place it inside `android/app/`.
+
+*(Alternatively, use the built-in **Local Student Profile** option in Settings for complete offline storage with 0 setup required!)*
 
 ---
 

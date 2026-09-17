@@ -1,0 +1,38 @@
+{
+  "_comment": "Replace this template with your actual google-services.json downloaded from Firebase Console for project package com.focuspath.app",
+  "project_info": {
+    "project_number": "123456789012",
+    "project_id": "gradient-study-app",
+    "storage_bucket": "gradient-study-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123456789012:android:abcdef0123456789abcdef",
+        "android_client_info": {
+          "package_name": "com.focuspath.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123456789012-xxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.focuspath.app",
+            "certificate_hash": "f684d5f08370186a4f1282afdf9570d51b5938a7"
+          }
+        },
+        {
+          "client_id": "123456789012-yyyyyyyyyyyyyyyyyyyyyyyy.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDemoKeyReplaceWithYourOwnFirebaseKey"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}

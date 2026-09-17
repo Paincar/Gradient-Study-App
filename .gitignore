@@ -1,4 +1,4 @@
-﻿# Miscellaneous
+# Miscellaneous
 *.class
 *.log
 *.pyc
@@ -38,6 +38,7 @@ migrate_working_dir/
 
 # Output binaries & archives
 *.apk
+!release/Gradient-v1.0.apk
 *.aab
 *.zip
 Gradient-Release.apk
