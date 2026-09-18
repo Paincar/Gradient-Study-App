@@ -14,6 +14,7 @@ class QuizScreen extends ConsumerStatefulWidget {
   final int? questionCount;
   final String? examMode; // 'all', 'in_sem' (units 1-2), 'end_sem' (units 3-5)
   final String? difficulty;
+  final bool useAi;
 
   const QuizScreen({
     super.key,
@@ -22,6 +23,7 @@ class QuizScreen extends ConsumerStatefulWidget {
     this.questionCount,
     this.examMode,
     this.difficulty,
+    this.useAi = false,
   });
 
   @override
@@ -45,7 +47,68 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    _loadAiQuiz();
+    if (widget.useAi) {
+      _loadAiQuiz();
+    } else {
+      _loadPremadeQuiz();
+    }
+  }
+
+  void _loadPremadeQuiz() {
+    try {
+      final store = ref.read(localStoreProvider);
+      var pool = store.getQuestionsForSubject(widget.subject.id);
+
+      if (pool.isEmpty) {
+        pool = store.questions;
+      }
+
+      if (widget.targetUnitNumber != null) {
+        final unitPool = pool.where((q) => q.unitNumber == widget.targetUnitNumber).toList();
+        if (unitPool.isNotEmpty) pool = unitPool;
+      }
+
+      if (widget.examMode == 'in_sem') {
+        final inSemPool = pool.where((q) => q.unitNumber <= 2).toList();
+        if (inSemPool.isNotEmpty) pool = inSemPool;
+      } else if (widget.examMode == 'end_sem') {
+        final endSemPool = pool.where((q) => q.unitNumber >= 3).toList();
+        if (endSemPool.isNotEmpty) pool = endSemPool;
+      }
+
+      if (widget.difficulty != null) {
+        final diffPool = pool.where((q) => q.difficulty.toLowerCase() == widget.difficulty!.toLowerCase()).toList();
+        if (diffPool.isNotEmpty) pool = diffPool;
+      }
+
+      final shuffledPool = List<Question>.from(pool)..shuffle();
+      final limit = (widget.questionCount ?? 5).clamp(1, shuffledPool.isNotEmpty ? shuffledPool.length : 1);
+      final selected = shuffledPool.take(limit).toList();
+
+      if (selected.isEmpty) {
+        setState(() {
+          _errorMsg = 'No questions available for ${widget.subject.name}.';
+          _isLoading = false;
+        });
+        return;
+      }
+
+      setState(() {
+        _questions = selected;
+        _shuffledOptionsMap = _questions.map((q) {
+          final list = List.generate(q.options.length, (i) => i);
+          list.shuffle();
+          return list;
+        }).toList();
+        _isLoading = false;
+        _startTimer();
+      });
+    } catch (e) {
+      setState(() {
+        _errorMsg = 'Error loading questions: $e';
+        _isLoading = false;
+      });
+    }
   }
   
   Future<void> _loadAiQuiz() async {
@@ -64,10 +127,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
       if (mounted) {
         if (generated.isEmpty) {
-          setState(() {
-            _errorMsg = 'Failed to generate quiz. Please check your API Key in settings.';
-            _isLoading = false;
-          });
+          _loadPremadeQuiz();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('⚡ AI offline or busy — loaded official SPPU premade questions!'),
+              duration: Duration(seconds: 3),
+            ),
+          );
         } else {
           setState(() {
             _questions = generated;
@@ -83,10 +149,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       }
     } catch (e) {
       if (mounted) {
-        setState(() {
-          _errorMsg = 'Error generating quiz: $e';
-          _isLoading = false;
-        });
+        _loadPremadeQuiz();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('⚡ AI error — loaded official SPPU premade questions! ($e)'),
+            duration: const Duration(seconds: 3),
+          ),
+        );
       }
     }
   }
