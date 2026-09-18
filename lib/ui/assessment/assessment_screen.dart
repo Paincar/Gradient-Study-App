@@ -61,11 +61,11 @@ class _AssessmentScreenState extends ConsumerState<AssessmentScreen> {
     final u1 = profile.getMasteryFor(subject.id, 1);
     final u2 = profile.getMasteryFor(subject.id, 2);
     final avgU12 = (u1 + u2) / 2.0;
-    final autoUnitTest = double.parse((avgU12 * 12.0).toStringAsFixed(1));
+    final autoUnitTest = double.tryParse((avgU12 * 12.0).toStringAsFixed(1)) ?? 0.0;
 
     // Unit 5 for Quiz
     final u5 = profile.getMasteryFor(subject.id, 5);
-    final autoQuiz = double.parse((u5 * 6.0).toStringAsFixed(1));
+    final autoQuiz = double.tryParse((u5 * 6.0).toStringAsFixed(1)) ?? 0.0;
 
     setState(() {
       _unitTestMarks = autoUnitTest.clamp(0.0, 12.0);
@@ -697,7 +697,7 @@ class _ParameterCard extends StatelessWidget {
                 max: maxMarks,
                 divisions: (maxMarks * 2).toInt(),
                 onChanged: (val) {
-                  final rounded = double.parse(val.toStringAsFixed(1));
+                  final rounded = double.tryParse(val.toStringAsFixed(1)) ?? val;
                   onChanged(rounded);
                 },
               ),

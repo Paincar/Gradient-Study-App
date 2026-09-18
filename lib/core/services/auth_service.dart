@@ -57,9 +57,13 @@ class AuthService {
   Future<void> init() async {
     try {
       if (Firebase.apps.isEmpty) {
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
+        if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
+          await Firebase.initializeApp(); // Read natively from google-services.json
+        } else {
+          await Firebase.initializeApp(
+            options: DefaultFirebaseOptions.currentPlatform,
+          );
+        }
       }
       _isFirebaseReady = true;
       FirebaseAuth.instance.authStateChanges().listen((user) {

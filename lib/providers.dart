@@ -57,9 +57,9 @@ class UserProfileNotifier extends StateNotifier<UserProfile> {
     final updatedMastery = Map<String, double>.from(state.unitMastery);
     if (existing != null) {
       // Rolling mastery calculation: 40% historical + 60% recent performance
-      updatedMastery[key] = double.parse(((existing * 0.4) + (newPct * 0.6)).toStringAsFixed(2));
+      updatedMastery[key] = double.tryParse(((existing * 0.4) + (newPct * 0.6)).toStringAsFixed(2)) ?? ((existing * 0.4) + (newPct * 0.6));
     } else {
-      updatedMastery[key] = double.parse(newPct.toStringAsFixed(2));
+      updatedMastery[key] = double.tryParse(newPct.toStringAsFixed(2)) ?? newPct;
     }
 
     // If unit mastery dropped below 60%, automatically ensure subject receives timetable boost

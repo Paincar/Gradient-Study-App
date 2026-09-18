@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import '../../data/models/models.dart';
 
 class GeminiService {
-  static const String _primaryModel = 'gemini-2.5-flash';
-  static const String _secondaryModel = 'gemini-2.0-flash';
-  static const String _fallbackModel = 'gemini-1.5-flash';
+  static const String _primaryModel = 'gemini-1.5-pro';
+  static const String _secondaryModel = 'gemini-1.5-flash';
+  static const String _fallbackModel = 'gemini-1.5-flash-8b';
 
   /// Generate a personalized SPPU engineering concept explanation using Gemini API
   static Future<String> explainConcept({
