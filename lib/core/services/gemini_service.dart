@@ -5,9 +5,27 @@ import 'package:http/http.dart' as http;
 import '../../data/models/models.dart';
 
 class GeminiService {
-  static const String _primaryModel = 'gemini-1.5-pro';
-  static const String _secondaryModel = 'gemini-1.5-flash';
-  static const String _fallbackModel = 'gemini-1.5-flash-8b';
+  static const String _primaryModel = 'gemini-1.5-flash';
+  static const String _secondaryModel = 'gemini-1.5-pro';
+  static const String _fallbackModel = 'gemini-2.0-flash';
+
+  /// Helper to reliably resolve OpenAI-compatible endpoint URL
+  static Uri resolveOpenAiUrl(String rawBaseUrl) {
+    var base = rawBaseUrl.trim();
+    if (!base.startsWith('http://') && !base.startsWith('https://')) {
+      base = 'http://$base';
+    }
+    while (base.endsWith('/')) {
+      base = base.substring(0, base.length - 1);
+    }
+    if (!base.endsWith('/v1') && !base.endsWith('/chat/completions')) {
+      base = '$base/v1';
+    }
+    if (!base.endsWith('/chat/completions')) {
+      base = '$base/chat/completions';
+    }
+    return Uri.parse(base);
+  }
 
   /// Generate a personalized SPPU engineering concept explanation using Gemini API
   static Future<String> explainConcept({
@@ -16,7 +34,10 @@ class GeminiService {
     required UserProfile profile,
     required String apiKey,
   }) async {
-    if (apiKey.trim().isEmpty) {
+    final hasLocalAi = profile.customOpenAiBaseUrl.trim().isNotEmpty;
+    final hasGeminiKey = apiKey.trim().isNotEmpty;
+
+    if (!hasLocalAi && !hasGeminiKey) {
       // Return offline fallback with rich structured answer
       return _generateOfflineFallback(prompt, subject, profile);
     }
@@ -87,21 +108,18 @@ Guidelines for the Perfect Answer:
 5. Formatting: Use clean markdown headers, bullet points, bold key terms, and LaTeX math formatting.
 ''';
 
-    if (profile.customOpenAiBaseUrl.isNotEmpty) {
+    if (hasLocalAi) {
+      final url = resolveOpenAiUrl(profile.customOpenAiBaseUrl);
       try {
-        final url = Uri.parse(profile.customOpenAiBaseUrl.endsWith('/')
-            ? '${profile.customOpenAiBaseUrl}chat/completions'
-            : '${profile.customOpenAiBaseUrl}/chat/completions');
-            
         final headers = {
           'Content-Type': 'application/json',
         };
-        if (profile.customOpenAiApiKey.isNotEmpty) {
-          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey}';
+        if (profile.customOpenAiApiKey.trim().isNotEmpty) {
+          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey.trim()}';
         }
         
         final body = jsonEncode({
-          'model': profile.customOpenAiModel.isNotEmpty ? profile.customOpenAiModel : 'llama',
+          'model': profile.customOpenAiModel.trim().isNotEmpty ? profile.customOpenAiModel.trim() : 'llama',
           'messages': [
             {'role': 'system', 'content': systemPrompt},
             {'role': 'user', 'content': prompt.trim()},
@@ -120,12 +138,19 @@ Guidelines for the Perfect Answer:
           }
         } else {
           debugPrint('OpenAI Compatible API Error: ${response.statusCode} - ${response.body}');
+          if (!hasGeminiKey) {
+            return '⚠️ Local AI Server returned HTTP ${response.statusCode}\n\nEndpoint: $url\nResponse: ${response.body}\n\nOffline Concept Summary:\n\n${_generateOfflineFallback(prompt, subject, profile)}';
+          }
         }
       } catch (e) {
         debugPrint('OpenAI Compatible API call failed: $e');
-        return '⚠️ Open Source API Connection: $e\n\nOffline Concept Summary:\n\n${_generateOfflineFallback(prompt, subject, profile)}';
+        if (!hasGeminiKey) {
+          return '⚠️ Local AI Connection Failed: $e\n\nEndpoint: $url\n\nOffline Concept Summary:\n\n${_generateOfflineFallback(prompt, subject, profile)}';
+        }
       }
-    } else {
+    }
+
+    if (hasGeminiKey) {
       // Use Gemini API
       // Try models in sequence with fallback
       for (final modelName in [_primaryModel, _secondaryModel, _fallbackModel]) {
@@ -227,19 +252,22 @@ Guidelines:
 3. Keep formatting clean with bold headers, bullet points, and equations.
 ''';
 
-    if (profile.customOpenAiBaseUrl.isNotEmpty) {
+    String? localError;
+    if (profile.customOpenAiBaseUrl.trim().isNotEmpty) {
+      final url = resolveOpenAiUrl(profile.customOpenAiBaseUrl);
       try {
-        final url = Uri.parse(profile.customOpenAiBaseUrl.endsWith('/')
-            ? '${profile.customOpenAiBaseUrl}chat/completions'
-            : '${profile.customOpenAiBaseUrl}/chat/completions');
         final headers = {'Content-Type': 'application/json'};
-        if (profile.customOpenAiApiKey.isNotEmpty) {
-          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey}';
+        if (profile.customOpenAiApiKey.trim().isNotEmpty) {
+          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey.trim()}';
         }
 
         final messages = <Map<String, String>>[
           {'role': 'system', 'content': systemPrompt},
-          ...history,
+          ...history.where((m) => (m['content'] ?? '').trim().isNotEmpty).map((m) {
+            final r = m['role'];
+            final roleName = (r == 'user') ? 'user' : 'assistant';
+            return {'role': roleName, 'content': m['content'] ?? ''};
+          }),
           {'role': 'user', 'content': prompt.trim()},
         ];
 
@@ -247,24 +275,32 @@ Guidelines:
           url,
           headers: headers,
           body: jsonEncode({
-            'model': profile.customOpenAiModel.isNotEmpty ? profile.customOpenAiModel : 'llama3',
+            'model': profile.customOpenAiModel.trim().isNotEmpty ? profile.customOpenAiModel.trim() : 'llama3',
             'messages': messages,
             'temperature': 0.7,
           }),
-        ).timeout(const Duration(seconds: 25));
+        ).timeout(const Duration(seconds: 30));
 
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body) as Map<String, dynamic>;
           final choices = data['choices'] as List<dynamic>?;
           if (choices != null && choices.isNotEmpty) {
-            return choices.first['message']['content']?.toString() ?? 'No response generated.';
+            final text = choices.first['message']?['content']?.toString();
+            if (text != null && text.trim().isNotEmpty) {
+              return text.trim();
+            }
           }
+        } else {
+          localError = 'HTTP ${response.statusCode}: ${response.body} (URL: $url)';
+          debugPrint('Custom OpenAI chat error: $localError');
         }
       } catch (e) {
-        debugPrint('Custom OpenAI chat error: $e');
+        localError = '$e (URL: $url)';
+        debugPrint('Custom OpenAI chat error: $localError');
       }
     }
 
+    String? geminiError;
     if (apiKey.trim().isNotEmpty) {
       for (final modelName in [_primaryModel, _secondaryModel, _fallbackModel]) {
         try {
@@ -274,14 +310,20 @@ Guidelines:
             systemInstruction: Content.system(systemPrompt),
           );
 
+          // Gemini requires chat history to start with a user message and alternate
+          final validGeminiHistory = <Content>[];
+          for (final m in history) {
+            final text = (m['content'] ?? '').trim();
+            if (text.isEmpty) continue;
+            final isUser = m['role'] == 'user';
+            if (validGeminiHistory.isEmpty && !isUser) continue;
+            validGeminiHistory.add(
+              isUser ? Content.text(text) : Content.model([TextPart(text)]),
+            );
+          }
+
           final chatSession = model.startChat(
-            history: history.map((m) {
-              if (m['role'] == 'user') {
-                return Content.text(m['content'] ?? '');
-              } else {
-                return Content.model([TextPart(m['content'] ?? '')]);
-              }
-            }).toList(),
+            history: validGeminiHistory,
           );
 
           final response = await chatSession.sendMessage(Content.text(prompt.trim())).timeout(const Duration(seconds: 25));
@@ -290,6 +332,7 @@ Guidelines:
             return text.trim();
           }
         } catch (e) {
+          geminiError = '$modelName: $e';
           debugPrint('Gemini chat failed on $modelName: $e');
         }
       }
@@ -315,7 +358,20 @@ You can tap the action button below to instantly apply this optimized End-Sem pl
 ''';
     }
 
-    return '💡 **AI Academic Tutor**\n\nTo unlock live real-time conversational responses from Gemini 2.5 Flash, please configure your Gemini API Key in Settings (or connect your local llama.cpp / Ollama API endpoint).';
+    // If both configured providers failed, show the specific diagnostic error!
+    if (localError != null || geminiError != null) {
+      final buffer = StringBuffer('⚠️ **AI Connection Diagnostics:**\n\n');
+      if (localError != null) {
+        buffer.writeln('• **Local AI Error:**\n```\n$localError\n```\n');
+      }
+      if (geminiError != null) {
+        buffer.writeln('• **Gemini API Error:**\n```\n$geminiError\n```\n');
+      }
+      buffer.writeln('💡 *Tip: Check your Wi-Fi IP, port, server flags (--host 0.0.0.0), or API key in Settings.*');
+      return buffer.toString();
+    }
+
+    return '💡 **AI Academic Tutor**\n\nTo unlock live real-time conversational responses, please configure your Gemini API Key in Settings (or connect your local llama.cpp / Ollama server endpoint).';
   }
 
   /// Generates a Quiz dynamically using AI (Gemini or OpenAI Compatible)
@@ -335,16 +391,17 @@ Format the output EXACTLY as a JSON array of objects. Do not include markdown co
 "questionText" (string), "options" (array of 4 strings), "correctOption" (integer 0-3), "explanation" (string), "difficulty" (string: Easy/Medium/Hard).
 ''';
 
-    if (profile.customOpenAiBaseUrl.trim().isNotEmpty && profile.customOpenAiApiKey.trim().isNotEmpty) {
-      // Use Custom OpenAI API
+    if (profile.customOpenAiBaseUrl.trim().isNotEmpty) {
+      final url = resolveOpenAiUrl(profile.customOpenAiBaseUrl);
       final model = profile.customOpenAiModel.trim().isNotEmpty ? profile.customOpenAiModel.trim() : 'llama3';
       try {
+        final headers = {'Content-Type': 'application/json'};
+        if (profile.customOpenAiApiKey.trim().isNotEmpty) {
+          headers['Authorization'] = 'Bearer ${profile.customOpenAiApiKey.trim()}';
+        }
         final response = await http.post(
-          Uri.parse('${profile.customOpenAiBaseUrl.trim()}/v1/chat/completions'),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer \${profile.customOpenAiApiKey.trim()}',
-          },
+          url,
+          headers: headers,
           body: jsonEncode({
             'model': model,
             'messages': [
@@ -353,16 +410,16 @@ Format the output EXACTLY as a JSON array of objects. Do not include markdown co
             ],
             'temperature': 0.7,
           }),
-        );
+        ).timeout(const Duration(seconds: 40));
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           final text = data['choices'][0]['message']['content'] as String;
           return _parseQuizJson(text, subject.id, targetUnitNumber ?? 1);
         } else {
-          debugPrint('Local API error: \${response.statusCode}');
+          debugPrint('Local API error: ${response.statusCode} - ${response.body}');
         }
       } catch (e) {
-        debugPrint('Local API exception: \$e');
+        debugPrint('Local API exception: $e');
       }
       return [];
     }
