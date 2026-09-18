@@ -5,13 +5,9 @@ import 'package:http/http.dart' as http;
 import '../../data/models/models.dart';
 
 class GeminiService {
-  static const List<String> supportedGeminiModels = [
-    'gemini-3.6-flash',
-    'gemini-3.8-flash',
-    'gemini-3.7-flash',
-    'gemini-3.5-flash',
-    'gemini-1.5-flash',
-  ];
+  static const String _primaryModel = 'gemini-3.6-flash';
+  static const String _secondaryModel = 'gemini-2.5-flash';
+  static const String _fallbackModel = 'gemini-1.5-flash';
 
   /// Helper to reliably resolve OpenAI-compatible endpoint URL
   static Uri resolveOpenAiUrl(String rawBaseUrl) {
@@ -157,7 +153,7 @@ Guidelines for the Perfect Answer:
     if (hasGeminiKey) {
       // Use Gemini API
       // Try models in sequence with fallback
-      for (final modelName in supportedGeminiModels) {
+      for (final modelName in [_primaryModel, _secondaryModel, _fallbackModel]) {
         try {
           final model = GenerativeModel(
             model: modelName,
@@ -174,7 +170,7 @@ Guidelines for the Perfect Answer:
           }
         } catch (e) {
           debugPrint('Gemini call failed on $modelName: $e');
-          if (modelName == supportedGeminiModels.last) {
+          if (modelName == _fallbackModel) {
             return '⚠️ Gemini API Connection: $e\n\nOffline Concept Summary:\n\n${_generateOfflineFallback(prompt, subject, profile)}';
           }
         }
@@ -306,7 +302,7 @@ Guidelines:
 
     String? geminiError;
     if (apiKey.trim().isNotEmpty) {
-      for (final modelName in supportedGeminiModels) {
+      for (final modelName in [_primaryModel, _secondaryModel, _fallbackModel]) {
         try {
           final model = GenerativeModel(
             model: modelName,
@@ -430,22 +426,19 @@ Format the output EXACTLY as a JSON array of objects. Do not include markdown co
 
     if (apiKey.trim().isEmpty) return [];
 
-    // Use Gemini API with automatic fallback
-    for (final modelName in supportedGeminiModels) {
-      try {
-        final model = GenerativeModel(
-          model: modelName,
-          apiKey: apiKey,
-          systemInstruction: Content.system(systemPrompt),
-        );
-        final response = await model.generateContent([Content.text('Generate the quiz now in JSON.')]);
-        if (response.text != null) {
-          final questions = _parseQuizJson(response.text!, subject.id, targetUnitNumber ?? 1);
-          if (questions.isNotEmpty) return questions;
-        }
-      } catch (e) {
-        debugPrint('Gemini API quiz generation failed on $modelName: $e');
+    // Use Gemini API
+    try {
+      final model = GenerativeModel(
+        model: _primaryModel,
+        apiKey: apiKey,
+        systemInstruction: Content.system(systemPrompt),
+      );
+      final response = await model.generateContent([Content.text('Generate the quiz now in JSON.')]);
+      if (response.text != null) {
+        return _parseQuizJson(response.text!, subject.id, targetUnitNumber ?? 1);
       }
+    } catch (e) {
+      debugPrint('Gemini API quiz generation failed: \$e');
     }
     return [];
   }
