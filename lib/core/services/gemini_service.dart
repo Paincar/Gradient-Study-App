@@ -125,9 +125,10 @@ Guidelines for the Perfect Answer:
             {'role': 'user', 'content': prompt.trim()},
           ],
           'temperature': 0.7,
+          'max_tokens': 800,
         });
 
-        final response = await http.post(url, headers: headers, body: body).timeout(const Duration(seconds: 40));
+        final response = await http.post(url, headers: headers, body: body).timeout(const Duration(seconds: 120));
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           if (data['choices'] != null && data['choices'].isNotEmpty) {
@@ -275,11 +276,12 @@ Guidelines:
           url,
           headers: headers,
           body: jsonEncode({
-            'model': profile.customOpenAiModel.trim().isNotEmpty ? profile.customOpenAiModel.trim() : 'llama3',
+            'model': profile.customOpenAiModel.trim().isNotEmpty ? profile.customOpenAiModel.trim() : 'gemma',
             'messages': messages,
             'temperature': 0.7,
+            'max_tokens': 600,
           }),
-        ).timeout(const Duration(seconds: 30));
+        ).timeout(const Duration(seconds: 120));
 
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body) as Map<String, dynamic>;
@@ -410,7 +412,7 @@ Format the output EXACTLY as a JSON array of objects. Do not include markdown co
             ],
             'temperature': 0.7,
           }),
-        ).timeout(const Duration(seconds: 40));
+        ).timeout(const Duration(seconds: 120));
         if (response.statusCode == 200) {
           final data = jsonDecode(response.body);
           final text = data['choices'][0]['message']['content'] as String;
