@@ -34,8 +34,35 @@ class MainActivity : FlutterActivity() {
 
         createNotificationChannels()
 
+        // Automatically prompt for notification permission on Android 13+ (API 33+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1010)
+            }
+        }
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             when (call.method) {
+                "checkNotificationPermission" -> {
+                    val granted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+                    } else {
+                        androidx.core.app.NotificationManagerCompat.from(this).areNotificationsEnabled()
+                    }
+                    result.success(granted)
+                }
+                "requestNotificationPermission" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1010)
+                        result.success(true)
+                    } else {
+                        val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                        }
+                        startActivity(intent)
+                        result.success(true)
+                    }
+                }
                 "showNotification" -> {
                     val id = call.argument<Int>("id") ?: 1001
                     val title = call.argument<String>("title") ?: "Gradient Notification"

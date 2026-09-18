@@ -113,7 +113,9 @@ class _AiAssistantScreenState extends ConsumerState<AiAssistantScreen> {
         }
       }
 
-      final history = _messages.take(_messages.length - 1).map((m) => {
+      final historyMessages = _messages.where((m) => m.id != 'welcome').toList();
+      final history = (historyMessages.length > 1 ? historyMessages.take(historyMessages.length - 1) : <ChatMessage>[])
+          .map((m) => {
         'role': m.sender == 'user' ? 'user' : 'model',
         'content': m.text,
       }).toList();
