@@ -15,6 +15,7 @@ import '../feedback/feedback_screen.dart';
 import '../onboarding/onboarding_screen.dart';
 import '../syllabus/syllabus_screen.dart';
 import 'app_blocking_screen.dart';
+import '../../core/services/native_service.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -863,6 +864,37 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
               const _SectionHeader(title: 'Study Notifications & Reminders'),
               const SizedBox(height: 10),
+
+              // Test Notification & Permission Trigger
+              Card(
+                margin: const EdgeInsets.only(bottom: 8),
+                child: ListTile(
+                  leading: const Icon(Icons.notifications_active_rounded, color: RosePineColors.dawnLove),
+                  title: Text('Test System Notification & Permissions', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: textPrimary)),
+                  subtitle: Text('Tap to verify sound, banner, and grant Android permissions', style: TextStyle(fontSize: 12, color: textSubtle)),
+                  trailing: const Icon(Icons.send_rounded, size: 20),
+                  onTap: () async {
+                    final hasPerm = await NativeService.checkNotificationPermission();
+                    if (!hasPerm) {
+                      await NativeService.requestNotificationPermission();
+                    }
+                    final sent = await NativeService.showNotification(
+                      title: '🔔 Gradient Study Reminder',
+                      body: 'Your study notifications and timetable alarms are active!',
+                    );
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: sent ? RosePineColors.dawnPine : RosePineColors.dawnLove,
+                          content: Text(sent
+                              ? '✅ Notification sent! Check your notification bar.'
+                              : '⚠️ Notification permission required. Please enable notifications in Settings.'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
 
               // Morning Briefing
               Card(

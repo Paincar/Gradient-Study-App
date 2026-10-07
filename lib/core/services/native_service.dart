@@ -4,6 +4,28 @@ import 'package:flutter/services.dart';
 class NativeService {
   static const MethodChannel _channel = MethodChannel('com.focuspath.app/native');
 
+  /// Checks if system notification permission is granted
+  static Future<bool> checkNotificationPermission() async {
+    try {
+      final result = await _channel.invokeMethod<bool>('checkNotificationPermission');
+      return result ?? false;
+    } catch (e) {
+      debugPrint('NativeService.checkNotificationPermission failed: $e');
+      return false;
+    }
+  }
+
+  /// Prompts user to grant system notification permission
+  static Future<bool> requestNotificationPermission() async {
+    try {
+      final result = await _channel.invokeMethod<bool>('requestNotificationPermission');
+      return result ?? false;
+    } catch (e) {
+      debugPrint('NativeService.requestNotificationPermission failed: $e');
+      return false;
+    }
+  }
+
   /// Displays an immediate native system notification with sound and vibration
   static Future<bool> showNotification({
     required String title,

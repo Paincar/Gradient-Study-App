@@ -28,6 +28,7 @@ class _TestHubScreenState extends ConsumerState<TestHubScreen> {
   int _quizUnitNumber = 1;
   int _questionCount = 5;
   String _difficulty = 'Medium';
+  bool _useAiQuiz = false;
 
   @override
   Widget build(BuildContext context) {
@@ -367,14 +368,41 @@ class _TestHubScreenState extends ConsumerState<TestHubScreen> {
                           }).toList(),
                         ),
 
+                        const SizedBox(height: 16),
+
+                        // Question Source (Premade vs AI)
+                        Text('Question Source:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: textPrimary)),
+                        const SizedBox(height: 6),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ChoiceChip(
+                                label: const Center(child: Text('📚 Official SPPU Bank', style: TextStyle(fontSize: 12))),
+                                selected: !_useAiQuiz,
+                                selectedColor: irisAccent.withValues(alpha: 0.25),
+                                onSelected: (_) => setState(() => _useAiQuiz = false),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: ChoiceChip(
+                                label: const Center(child: Text('✨ AI Generated', style: TextStyle(fontSize: 12))),
+                                selected: _useAiQuiz,
+                                selectedColor: primaryColor.withValues(alpha: 0.25),
+                                onSelected: (_) => setState(() => _useAiQuiz = true),
+                              ),
+                            ),
+                          ],
+                        ),
+
                         const SizedBox(height: 24),
 
                         // Launch Custom Quiz Button
                         ElevatedButton.icon(
-                          icon: const Icon(Icons.rocket_launch_rounded),
-                          label: const Text('Start Custom Quiz', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                          icon: Icon(_useAiQuiz ? Icons.auto_awesome_rounded : Icons.rocket_launch_rounded),
+                          label: Text(_useAiQuiz ? 'Generate AI Quiz' : 'Start Premade Quiz', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: irisAccent,
+                            backgroundColor: _useAiQuiz ? primaryColor : irisAccent,
                             foregroundColor: Colors.white,
                             minimumSize: const Size.fromHeight(50),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -392,6 +420,7 @@ class _TestHubScreenState extends ConsumerState<TestHubScreen> {
                                   targetUnitNumber: _quizUnitNumber,
                                   questionCount: _questionCount,
                                   difficulty: _difficulty,
+                                  useAi: _useAiQuiz,
                                 ),
                               ),
                             );
